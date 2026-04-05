@@ -13,13 +13,13 @@ import '@fontsource/roboto/700.css';
 const router = createBrowserRouter([
   {
     path: "/",
-    element:<Layout />,
+    element: <Layout />,
     children: [
       {
-        path:"/",
-        element:<Home />,
+        path: "/",
+        element: <Home />,
       },
-      {path:"*",element:<NotFound />}
+      { path: "*", element: <NotFound /> }
     ]
   }
 ]);

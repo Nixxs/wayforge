@@ -1,14 +1,22 @@
+/* Reset */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+/* Ensure full height */
 html, body, #root {
   height: 100%;
   overflow-x: hidden;
 }
 
-body {
-  overflow-y: hidden;
+/* Hide scrollbar globally */
+* {
+  -ms-overflow-style: none;  /* IE/Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+*::-webkit-scrollbar {
+  display: none;             /* Chrome/Safari */
 }
