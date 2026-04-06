@@ -8,15 +8,19 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import EmailIcon from "@mui/icons-material/Email";
 import { palette } from "../../theme";
 import TermsModal from "../../components/TermsModal";
-
-const fleetLinks = ["Vehicle Fleet", "Troopy Conversion", "Wagon Specs", "Safety Specs"];
+import RoofConversionModal from "../../components/RoofConversionModal";
+import VehicleSpecsModal from "../../components/VehicleSpecsModal";
 
 export default function Footer() {
     const [termsOpen, setTermsOpen] = useState(false);
+    const [roofOpen, setRoofOpen] = useState(false);
+    const [specsOpen, setSpecsOpen] = useState(false);
 
     return (
-        <Box sx={{ backgroundColor: palette.navy }}>
+        <Box id="contact" sx={{ backgroundColor: palette.navy }}>
             <TermsModal open={termsOpen} onClose={() => setTermsOpen(false)} />
+            <RoofConversionModal open={roofOpen} onClose={() => setRoofOpen(false)} />
+            <VehicleSpecsModal open={specsOpen} onClose={() => setSpecsOpen(false)} />
             <Container maxWidth="xl">
                 <Box sx={{ py: { xs: 6, md: 8 } }}>
                     <Grid container spacing={{ xs: 5, md: 4 }}>
@@ -61,22 +65,26 @@ export default function Footer() {
                                 The Fleet
                             </Typography>
                             <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
-                                {fleetLinks.map((link) => (
+                                {([
+                                    { label: "Vehicle Fleet", action: () => document.getElementById("fleet")?.scrollIntoView({ behavior: "smooth" }) },
+                                    { label: "Troopy Roof Conversion", action: () => setRoofOpen(true) },
+                                    { label: "Vehicle Specs", action: () => setSpecsOpen(true) },
+                                ] as const).map(({ label, action }) => (
                                     <Typography
-                                        key={link}
-                                        component="a"
-                                        href="#"
+                                        key={label}
+                                        onClick={action}
                                         sx={{
                                             color: "rgba(255,255,255,0.6)",
                                             fontSize: "0.78rem",
                                             letterSpacing: 1.5,
                                             textTransform: "uppercase",
                                             textDecoration: "none",
+                                            cursor: "pointer",
                                             "&:hover": { color: "white" },
                                             transition: "color 0.2s",
                                         }}
                                     >
-                                        {link}
+                                        {label}
                                     </Typography>
                                 ))}
                             </Box>
@@ -146,17 +154,25 @@ export default function Footer() {
                             >
                                 Connect
                             </Typography>
-                            <Typography
-                                sx={{
-                                    color: "rgba(255,255,255,0.5)",
-                                    fontSize: "0.85rem",
-                                    lineHeight: 1.75,
-                                    mb: 2.5,
-                                    maxWidth: 220,
-                                }}
-                            >
-                                Join our community of explorers.
-                            </Typography>
+                            <Box sx={{ display: "flex", flexDirection: "column", gap: 1.25, mb: 2.5 }}>
+                                <Typography sx={{ color: "rgba(255,255,255,0.55)", fontSize: "0.83rem", lineHeight: 1.6 }}>
+                                    Perth, Western Australia
+                                </Typography>
+                                <Typography
+                                    component="a"
+                                    href="tel:+61400000000"
+                                    sx={{ color: "rgba(255,255,255,0.55)", fontSize: "0.83rem", textDecoration: "none", "&:hover": { color: "white" }, transition: "color 0.2s" }}
+                                >
+                                    +61 400 000 000
+                                </Typography>
+                                <Typography
+                                    component="a"
+                                    href="mailto:info@wayforge.com.au"
+                                    sx={{ color: "rgba(255,255,255,0.55)", fontSize: "0.83rem", textDecoration: "none", "&:hover": { color: "white" }, transition: "color 0.2s" }}
+                                >
+                                    info@wayforge.com.au
+                                </Typography>
+                            </Box>
                             <Box sx={{ display: "flex", gap: 1.5 }}>
                                 <Box
                                     component="a"

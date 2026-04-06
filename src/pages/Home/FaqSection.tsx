@@ -42,7 +42,7 @@ export default function FaqSection() {
     }
 
     return (
-        <Box sx={{ 
+        <Box id="faq" sx={{ 
             backgroundColor: palette.cream, 
             py: { xs: 6, md: 10 },
             boxShadow: "inset 0 10px 30px rgba(1,31,46,0.2)",

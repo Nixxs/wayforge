@@ -6,6 +6,8 @@ import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import GalleryModal, { type GalleryItem } from "../../components/GalleryModal";
+import RoofConversionModal from "../../components/RoofConversionModal";
+import VehicleSpecsModal from "../../components/VehicleSpecsModal";
 import BuildIcon from "@mui/icons-material/Build";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import BoltIcon from "@mui/icons-material/Bolt";
@@ -38,7 +40,7 @@ const vehicles = [
             { Icon: AirIcon, label: "Air Conditioning" },
             { Icon: MapIcon, label: "GPS Navigation" },
         ],
-        bookingUrl: "#",
+        bookingUrl: "https://www.camplify.com.au/rv/151421",
     },
     {
         name: "Nolan (Adventure Rig)",
@@ -56,15 +58,19 @@ const vehicles = [
             { Icon: LocalGasStationIcon, label: "Long Range Tank" },
             { Icon: ShowerIcon, label: "Outdoor Shower" },
         ],
-        bookingUrl: "#",
+        bookingUrl: "https://www.camplify.com.au/rv/151421",
     },
 ];
 
 export default function FleetSection() {
     const [activeGallery, setActiveGallery] = useState<GalleryItem | null>(null);
+    const [roofOpen, setRoofOpen] = useState(false);
+    const [specsOpen, setSpecsOpen] = useState(false);
 
     return (
-        <Box sx={{ backgroundColor: palette.cream, py: { xs: 6, md: 10 } }}>
+        <Box id="fleet" sx={{ backgroundColor: palette.cream, py: { xs: 6, md: 10 } }}>
+            <RoofConversionModal open={roofOpen} onClose={() => setRoofOpen(false)} />
+            <VehicleSpecsModal open={specsOpen} onClose={() => setSpecsOpen(false)} />
             <Container maxWidth="xl">
                 {/* Section header */}
                 <Box
@@ -73,7 +79,7 @@ export default function FleetSection() {
                         alignItems: { md: "flex-end" },
                         flexDirection: { xs: "column", md: "row" },
                         justifyContent: "space-between",
-                        mb: { xs: 5, md: 7 },
+                        mb: { xs: 1, md: 3 },
                         gap: 2,
                     }}
                 >
@@ -85,7 +91,7 @@ export default function FleetSection() {
                                 fontWeight: 700,
                                 letterSpacing: "0.16em",
                                 textTransform: "uppercase",
-                                mb: 1,
+                                mb: 2,
                             }}
                         >
                             Engineered for the Outback
@@ -102,19 +108,59 @@ export default function FleetSection() {
                         >
                             The Fleet
                         </Typography>
+                        {/* Modal quick-links */}
+                        <Box sx={{ display: "flex", gap: 3, mb: { xs: 1, md: 2 }, mt: { xs: 1, md: 3 }, flexWrap: "wrap" }}>
+                            <Typography
+                                onClick={() => setSpecsOpen(true)}
+                                sx={{
+                                    cursor: "pointer",
+                                    color: palette.navy,
+                                    fontSize: "0.78rem",
+                                    fontWeight: 700,
+                                    letterSpacing: "0.1em",
+                                    textTransform: "uppercase",
+                                    borderBottom: `2px solid ${palette.blue}`,
+                                    pb: "2px",
+                                    transition: "opacity 0.2s",
+                                    "&:hover": { opacity: 0.7 },
+                                }}
+                            >
+                                View Full Specifications
+                            </Typography>
+                            <Typography
+                                onClick={() => setRoofOpen(true)}
+                                sx={{
+                                    cursor: "pointer",
+                                    color: palette.navy,
+                                    fontSize: "0.78rem",
+                                    fontWeight: 700,
+                                    letterSpacing: "0.1em",
+                                    textTransform: "uppercase",
+                                    borderBottom: `2px solid ${palette.blue}`,
+                                    pb: "2px",
+                                    transition: "opacity 0.2s",
+                                    "&:hover": { opacity: 0.7 },
+                                }}
+                            >
+                                About the Roof Conversion
+                            </Typography>
+                        </Box>
                     </Box>
                     <Typography
                         sx={{
-                            color: palette.blue,
+                            color: palette.tan,
                             fontSize: "0.8rem",
-                            maxWidth: 280,
+                            maxWidth: 320,
                             lineHeight: 1.65,
                             textAlign: { xs: "left", md: "right" },
+                            mb: { xs: 2, md: 4 },
                         }}
                     >
-                        Every vehicle is outfitted with the latest 12V technology and custom cabinet work.
+                        Every vehicle features a professionally crafted interior by Odyssey Custom Fitouts - purpose-built cabinetry designed for off-grid travel, with everything organised, accessible, and built to last.
                     </Typography>
                 </Box>
+
+
 
                 {/* Vehicle cards */}
                 <Box

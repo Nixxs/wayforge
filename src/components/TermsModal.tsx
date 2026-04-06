@@ -44,7 +44,7 @@ export default function TermsModal({ open, onClose }: Props) {
             fullWidth
             PaperProps={{
                 sx: {
-                    backgroundColor: "#fdf6e3",
+                    backgroundColor: palette.darkNavy,
                     borderRadius: 2,
                     maxHeight: "85vh",
                 },
@@ -64,7 +64,19 @@ export default function TermsModal({ open, onClose }: Props) {
                 <Box>
                     <Typography
                         sx={{
-                            color: palette.navy,
+                            color: palette.tan,
+                            fontWeight: 700,
+                            fontSize: "0.7rem",
+                            letterSpacing: 3,
+                            textTransform: "uppercase",
+                            mb: 1,
+                        }}
+                    >
+                        Wayforge Campers — wayforge.com.au
+                    </Typography>
+                    <Typography
+                        sx={{
+                            color: "white",
                             fontWeight: 900,
                             fontSize: { xs: "1.4rem", md: "1.8rem" },
                             textTransform: "uppercase",
@@ -74,16 +86,13 @@ export default function TermsModal({ open, onClose }: Props) {
                     >
                         Terms of Service
                     </Typography>
-                    <Typography sx={{ color: palette.tan, fontSize: "0.8rem", mt: 0.5 }}>
-                        Wayforge Campers — wayforge.com.au
-                    </Typography>
                 </Box>
-                <IconButton onClick={onClose} sx={{ color: palette.navy }}>
+                <IconButton onClick={onClose} sx={{ color: "rgba(255,255,255,0.6)" }}>
                     <CloseIcon />
                 </IconButton>
             </Box>
 
-            <Divider sx={{ borderColor: `${palette.navy}22`, mx: { xs: 3, md: 5 } }} />
+            <Divider sx={{ borderColor: "rgba(255,255,255,0.08)", mx: { xs: 3, md: 5 } }} />
 
             <DialogContent sx={{ px: { xs: 3, md: 5 }, py: 3 }}>
                 <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
@@ -91,7 +100,7 @@ export default function TermsModal({ open, onClose }: Props) {
                     <Box>
                         <Typography
                             sx={{
-                                color: palette.navy,
+                                color: palette.tan,
                                 fontWeight: 700,
                                 fontSize: "0.8rem",
                                 textTransform: "uppercase",
@@ -101,7 +110,7 @@ export default function TermsModal({ open, onClose }: Props) {
                         >
                             1. About This Website
                         </Typography>
-                        <Typography sx={{ color: "#555", fontSize: "0.88rem", lineHeight: 1.8 }}>
+                        <Typography sx={{ color: "rgba(255,255,255,0.65)", fontSize: "0.88rem", lineHeight: 1.8 }}>
                             This website (wayforge.com.au) is operated by Wayforge Campers and provides information about our LandCruiser camper hire vehicles. The site is informational only — all bookings are processed through Camplify.
                         </Typography>
                     </Box>
@@ -110,7 +119,7 @@ export default function TermsModal({ open, onClose }: Props) {
                     <Box>
                         <Typography
                             sx={{
-                                color: palette.navy,
+                                color: palette.tan,
                                 fontWeight: 700,
                                 fontSize: "0.8rem",
                                 textTransform: "uppercase",
@@ -122,21 +131,20 @@ export default function TermsModal({ open, onClose }: Props) {
                         </Typography>
                         <Box
                             sx={{
-                                backgroundColor: `${palette.navy}12`,
-                                border: `1px solid ${palette.navy}22`,
+                                backgroundColor: "rgba(255,255,255,0.04)",
+                                border: `1px solid rgba(255,255,255,0.08)`,
                                 borderRadius: 1.5,
                                 p: 2.5,
                             }}
                         >
-
-                            <Typography sx={{ color: "#555", fontSize: "0.88rem", lineHeight: 1.8 }}>
+                            <Typography sx={{ color: "rgba(255,255,255,0.65)", fontSize: "0.88rem", lineHeight: 1.8 }}>
                                 All hire bookings are made through{" "}
                                 <Typography
                                     component="a"
                                     href="https://www.camplify.com.au/terms"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    sx={{ color: palette.navy, fontWeight: 600, textDecoration: "underline" }}
+                                    sx={{ color: palette.tan, fontWeight: 600, textDecoration: "underline" }}
                                 >
                                     Camplify
                                 </Typography>{" "}
@@ -147,7 +155,7 @@ export default function TermsModal({ open, onClose }: Props) {
                                     href="https://www.camplify.com.au/terms"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    sx={{ color: palette.navy, fontWeight: 600, textDecoration: "underline" }}
+                                    sx={{ color: palette.tan, fontWeight: 600, textDecoration: "underline" }}
                                 >
                                     Camplify Terms of Service
                                 </Typography>{" "}
@@ -157,7 +165,7 @@ export default function TermsModal({ open, onClose }: Props) {
                                     href="https://terms.camplify.com.au/hirer-rules"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    sx={{ color: palette.navy, fontWeight: 600, textDecoration: "underline" }}
+                                    sx={{ color: palette.tan, fontWeight: 600, textDecoration: "underline" }}
                                 >
                                     Hirer Rules
                                 </Typography>
@@ -171,7 +179,7 @@ export default function TermsModal({ open, onClose }: Props) {
                             <Box key={section.heading}>
                                 <Typography
                                     sx={{
-                                        color: palette.navy,
+                                        color: palette.tan,
                                         fontWeight: 700,
                                         fontSize: "0.8rem",
                                         textTransform: "uppercase",
@@ -181,16 +189,16 @@ export default function TermsModal({ open, onClose }: Props) {
                                 >
                                     {section.heading}
                                 </Typography>
-                                <Typography sx={{ color: "#555", fontSize: "0.88rem", lineHeight: 1.8 }}>
+                                <Typography sx={{ color: "rgba(255,255,255,0.65)", fontSize: "0.88rem", lineHeight: 1.8 }}>
                                     {section.body}
                                 </Typography>
                             </Box>
                         ))}
                 </Box>
 
-                <Divider sx={{ my: 3, borderColor: `${palette.navy}22` }} />
+                <Divider sx={{ my: 3, borderColor: "rgba(255,255,255,0.08)" }} />
 
-                <Typography sx={{ color: "#aaa", fontSize: "0.75rem", textAlign: "center" }}>
+                <Typography sx={{ color: "rgba(255,255,255,0.25)", fontSize: "0.75rem", textAlign: "center" }}>
                     Last updated April 2025 · Wayforge Campers, Perth WA
                 </Typography>
             </DialogContent>

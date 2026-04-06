@@ -36,7 +36,7 @@ export default function DestinationsSection() {
     const [active, setActive] = useState<GalleryItem | null>(null);
 
     return (
-        <Box sx={{ backgroundColor: palette.darkNavy, py: { xs: 6, md: 10 }, position: "relative", zIndex: 2, boxShadow: "0 -10px 30px rgba(1,31,46,0.4)" }}>
+        <Box id="destinations" sx={{ backgroundColor: palette.darkNavy, py: { xs: 6, md: 10 }, position: "relative", zIndex: 2, boxShadow: "0 -10px 30px rgba(1,31,46,0.4)" }}>
             <Container maxWidth="xl">
                 {/* Header */}
                 <Box sx={{ mb: { xs: 4, md: 6 }, maxWidth: 520 }}>
