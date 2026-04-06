@@ -5,20 +5,20 @@ import { palette } from "../../theme";
 const cards = [
     {
         tag: "THE LIMITATIONS",
-        tagColor: palette.tan,
+        tagColor: palette.blue,
         heading: "Caravan: Bound by the Path.",
         image: "/caravan.jpg",
         body: "Comfortable, but inherently restrictive. Caravans tether you to the asphalt and crowded sites, creating a barrier between you and the true serenity of the wild Western frontier.",
-        bg: palette.cream,
-        headingColor: "#1a1a1a",
-        bodyColor: "#555",
+        bg: palette.navy,
+        headingColor: palette.light,
+        bodyColor: palette.light,
         imageFilter: "grayscale(100%)",
     },
     {
         tag: "THE EVOLUTION",
         tagColor: palette.navy,
         heading: "Wayforge: The Perfect Balance.",
-        image: "/reynolds.jpg",
+        image: "/the_evolution.jpg",
         body: "We provide a sanctuary on wheels. Experience the 'mini-caravan' interior—AC, lithium power, and permanent inside living—fused with the legendary spirit of the LandCruiser. Unrestricted. Unbound. All luxury.",
         bg: palette.blue,
         headingColor: "#ffffff",
@@ -27,13 +27,13 @@ const cards = [
     },
     {
         tag: "THE INCONVENIENCE",
-        tagColor: palette.tan,
+        tagColor: palette.blue,
         heading: "Tent/Swag: Freedom at a Cost.",
         image: "/tent.jpg",
         body: "Unbound access, but high friction. Fighting the elements and constant setup drains the peace from your exploration. You have the access, but lack the restful harmony of a true home.",
-        bg: palette.cream,
-        headingColor: "#1a1a1a",
-        bodyColor: "#555",
+        bg: palette.navy,
+        headingColor: palette.light,
+        bodyColor: palette.light,
         imageFilter: "grayscale(100%)",
     },
 ];
@@ -44,6 +44,9 @@ export default function ComparisonSection() {
             sx={{
                 display: "grid",
                 gridTemplateColumns: { xs: "1fr", md: "1fr 1fr 1fr" },
+                position: "relative",
+                zIndex: 1,
+                boxShadow: "0 10px 30px rgba(1,31,46,0.35)",
             }}
         >
             {cards.map((card) => (
@@ -62,7 +65,7 @@ export default function ComparisonSection() {
                         sx={{
                             color: card.tagColor,
                             fontSize: "0.7rem",
-                            fontWeight: 700,
+                            fontWeight: 900,
                             letterSpacing: "0.14em",
                             textTransform: "uppercase",
                         }}
