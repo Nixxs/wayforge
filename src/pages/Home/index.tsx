@@ -1,6 +1,7 @@
 import Hero from "./Hero";
 import ComparisonSection from "./ComparisonSection";
 import FleetSection from "./FleetSection";
+import DestinationsSection from "./DestinationsSection";
 
 export default function Home() {
     return (
@@ -8,6 +9,7 @@ export default function Home() {
             <Hero />
             <ComparisonSection />
             <FleetSection />
+            <DestinationsSection />
         </>
     );
 }
