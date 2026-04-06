@@ -7,13 +7,17 @@ import Typography from "@mui/material/Typography";
 import { Link as RouterLink, useLocation } from "react-router";
 import { palette } from "../theme";
 
-const navLinks = [
+const navLinks: Array<{ label: string; href?: string; scrollId?: string }> = [
     { label: "HOME", href: "/" },
-    { label: "VEHICLES", href: "/vehicles" },
-    { label: "DESTINATIONS", href: "/destinations" },
-    { label: "FAQ", href: "/faq" },
-    { label: "CONTACT", href: "/contact" },
+    { label: "VEHICLES", scrollId: "fleet" },
+    { label: "DESTINATIONS", scrollId: "destinations" },
+    { label: "FAQ", scrollId: "faq" },
+    { label: "CONTACT", scrollId: "contact" },
 ];
+
+function scrollToId(id: string) {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+}
 
 export default function Navbar() {
     const location = useLocation();
@@ -55,39 +59,40 @@ export default function Navbar() {
                         }}
                     >
                         {navLinks.map((link) => {
-                            const isActive = location.pathname === link.href;
+                            const isActive = link.href ? location.pathname === link.href : false;
+                            const linkSx = {
+                                color: isActive ? "white" : "rgba(255,255,255,0.75)",
+                                textDecoration: "none",
+                                fontSize: "0.78rem",
+                                fontWeight: 600,
+                                letterSpacing: "0.09em",
+                                textTransform: "uppercase",
+                                borderBottom: isActive
+                                    ? `2px solid ${palette.navy}`
+                                    : "2px solid transparent",
+                                pb: "4px",
+                                transition: "color 0.2s, border-color 0.2s",
+                                cursor: "pointer",
+                                "&:hover": {
+                                    color: "white",
+                                    borderBottomColor: palette.navy,
+                                },
+                            };
+                            const label = (
+                                <Typography sx={{ fontWeight: 600, letterSpacing: "0.09em", textTransform: "uppercase" }}>
+                                    {link.label}
+                                </Typography>
+                            );
+                            if (link.scrollId) {
+                                return (
+                                    <Box key={link.label} onClick={() => scrollToId(link.scrollId!)} sx={linkSx}>
+                                        {label}
+                                    </Box>
+                                );
+                            }
                             return (
-                                <Box
-                                    key={link.label}
-                                    component={RouterLink}
-                                    to={link.href}
-                                    sx={{
-                                        color: isActive ? "white" : "rgba(255,255,255,0.75)",
-                                        textDecoration: "none",
-                                        fontSize: "0.78rem",
-                                        fontWeight: 600,
-                                        letterSpacing: "0.09em",
-                                        textTransform: "uppercase",
-                                        borderBottom: isActive
-                                            ? `2px solid ${palette.navy}`
-                                            : "2px solid transparent",
-                                        pb: "4px",
-                                        transition: "color 0.2s, border-color 0.2s",
-                                        "&:hover": {
-                                            color: "white",
-                                            borderBottomColor: palette.navy,
-                                        },
-                                    }}
-                                >
-                                    <Typography
-                                        sx={{
-                                            fontWeight: 600,
-                                            letterSpacing: "0.09em",
-                                            textTransform: "uppercase",
-                                        }}
-                                    >
-                                        {link.label}
-                                    </Typography>
+                                <Box key={link.label} component={RouterLink} to={link.href!} sx={linkSx}>
+                                    {label}
                                 </Box>
                             );
                         })}
@@ -97,6 +102,9 @@ export default function Navbar() {
                     <Button
                         variant="contained"
                         disableElevation
+                        href="https://www.camplify.com.au/member/1363012"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         sx={{
                             backgroundColor: palette.navy,
                             color: "white",
