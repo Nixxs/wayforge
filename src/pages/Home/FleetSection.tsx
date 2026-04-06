@@ -21,14 +21,14 @@ import { palette } from "../../theme";
 
 const vehicles = [
     {
-        name: "The Troopy (LC78)",
+        name: "Reynolds (Family Cruiser)",
         badge: "MANUAL",
-        subtitle: "LUXURY POP-TOP LIVING",
+        subtitle: "Ideal for small families",
         image: "/reynolds.jpg",
         description:
             "The ultimate overlanding icon. Built with a V8 Turbo Diesel and a custom 'Penthouse' roof conversion for two adults.",
         features: [
-            { Icon: PeopleIcon, label: "Sleeps 2 Adults" },
+            { Icon: PeopleIcon, label: "Sleeps 2 Adults + 1 Child" },
             { Icon: WbSunnyIcon, label: "Solar Fit-out" },
             { Icon: KitchenIcon, label: "85L Fridge" },
             { Icon: SettingsIcon, label: "4.5L V8 Turbo" },
@@ -38,9 +38,9 @@ const vehicles = [
         bookingUrl: "#",
     },
     {
-        name: "The Wagon (LC76)",
-        badge: "AUTOMATIC",
-        subtitle: "PREMIUM INTERIOR FIT-OUT",
+        name: "Nolan (Adventure Rig)",
+        badge: "MANUAL",
+        subtitle: "Ultimate 2-person touring",
         image: "/nolan.jpg",
         description:
             "Versatile touring with heavy-duty performance. Features a high-capacity 12V system and modular rear storage.",
