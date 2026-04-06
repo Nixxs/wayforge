@@ -44,6 +44,9 @@ export default function ComparisonSection() {
             sx={{
                 display: "grid",
                 gridTemplateColumns: { xs: "1fr", md: "1fr 1fr 1fr" },
+                position: "relative",
+                zIndex: 1,
+                boxShadow: "0 10px 30px rgba(1,31,46,0.35)",
             }}
         >
             {cards.map((card) => (

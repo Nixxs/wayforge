@@ -4,6 +4,19 @@ import Chip from "@mui/material/Chip";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
+import BuildIcon from "@mui/icons-material/Build";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import BoltIcon from "@mui/icons-material/Bolt";
+import KitchenIcon from "@mui/icons-material/Kitchen";
+import PeopleIcon from "@mui/icons-material/People";
+import SettingsIcon from "@mui/icons-material/Settings";
+import WbSunnyIcon from "@mui/icons-material/WbSunny";
+import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
+import AirIcon from "@mui/icons-material/Air";
+import MapIcon from "@mui/icons-material/Map";
+import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
+import ShowerIcon from "@mui/icons-material/Shower";
+import type { SvgIconComponent } from "@mui/icons-material";
 import { palette } from "../../theme";
 
 const vehicles = [
@@ -15,10 +28,12 @@ const vehicles = [
         description:
             "The ultimate overlanding icon. Built with a V8 Turbo Diesel and a custom 'Penthouse' roof conversion for two adults.",
         features: [
-            { icon: "👥", label: "Sleeps 2 Adults" },
-            { icon: "☀️", label: "Solar Fit-out" },
-            { icon: "🧊", label: "85L Fridge" },
-            { icon: "⚙️", label: "4.5L V8 Turbo" },
+            { Icon: PeopleIcon, label: "Sleeps 2 Adults" },
+            { Icon: WbSunnyIcon, label: "Solar Fit-out" },
+            { Icon: KitchenIcon, label: "85L Fridge" },
+            { Icon: SettingsIcon, label: "4.5L V8 Turbo" },
+            { Icon: AirIcon, label: "Air Conditioning" },
+            { Icon: MapIcon, label: "GPS Navigation" },
         ],
         bookingUrl: "#",
     },
@@ -30,10 +45,12 @@ const vehicles = [
         description:
             "Versatile touring with heavy-duty performance. Features a high-capacity 12V system and modular rear storage.",
         features: [
-            { icon: "⚡", label: "12V Power" },
-            { icon: "🔧", label: "Recovery Gear" },
-            { icon: "✦", label: "Premium Fit-out" },
-            { icon: "🎛️", label: "Digital Cockpit" },
+            { Icon: BoltIcon, label: "12V Power" },
+            { Icon: BuildIcon, label: "Recovery Gear" },
+            { Icon: WorkspacePremiumIcon, label: "Premium Fit-out" },
+            { Icon: DashboardIcon, label: "Digital Cockpit" },
+            { Icon: LocalGasStationIcon, label: "Long Range Tank" },
+            { Icon: ShowerIcon, label: "Outdoor Shower" },
         ],
         bookingUrl: "#",
     },
@@ -41,7 +58,7 @@ const vehicles = [
 
 export default function FleetSection() {
     return (
-        <Box sx={{ backgroundColor: palette.cream, py: { xs: 6, md: 10 } }}>
+        <Box sx={{ backgroundColor: palette.grey, py: { xs: 6, md: 10 } }}>
             <Container maxWidth="xl">
                 {/* Section header */}
                 <Box
@@ -82,8 +99,8 @@ export default function FleetSection() {
                     </Box>
                     <Typography
                         sx={{
-                            color: palette.navy,
-                            fontSize: "0.92rem",
+                            color: palette.blue,
+                            fontSize: "0.8rem",
                             maxWidth: 280,
                             lineHeight: 1.65,
                             textAlign: { xs: "left", md: "right" },
@@ -191,16 +208,16 @@ export default function FleetSection() {
                                 <Box
                                     sx={{
                                         display: "grid",
-                                        gridTemplateColumns: "1fr 1fr",
+                                        gridTemplateColumns: "1fr 1fr 1fr",
                                         gap: 1.5,
                                     }}
                                 >
-                                    {v.features.map((f) => (
+                                    {v.features.map((f: { Icon: SvgIconComponent; label: string }) => (
                                         <Box
                                             key={f.label}
                                             sx={{ display: "flex", alignItems: "center", gap: 1 }}
                                         >
-                                            <Typography sx={{ fontSize: "1rem", lineHeight: 1 }}>{f.icon}</Typography>
+                                            <f.Icon sx={{ color: palette.navy, fontSize: "1.15rem" }} />
                                             <Typography
                                                 sx={{
                                                     fontSize: "0.8rem",
