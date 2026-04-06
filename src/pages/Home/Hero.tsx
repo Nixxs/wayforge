@@ -101,6 +101,7 @@ export default function Hero() {
                         <Button
                             variant="contained"
                             disableElevation
+                            onClick={() => document.getElementById("fleet")?.scrollIntoView({ behavior: "smooth" })}
                             sx={{
                                 backgroundColor: palette.navy,
                                 border: "1.5px solid rgba(255,255,255,0.35)",
