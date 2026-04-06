@@ -23,7 +23,7 @@ export default function Navbar() {
             position="fixed"
             elevation={0}
             sx={{
-                backgroundColor: `${palette.navy}cc`,
+                backgroundColor: `${palette.blue}cc`,
                 backdropFilter: "blur(12px)",
                 WebkitBackdropFilter: "blur(12px)",
                 zIndex: 1100,
@@ -39,9 +39,9 @@ export default function Navbar() {
                     >
                         <Box
                             component="img"
-                            src="/Wayforge_Logo_FV.png"
+                            src="/Wayforge_Logo_Blue.png"
                             alt="Wayforge"
-                            sx={{ height: 20 }}
+                            sx={{ height: 40 }}
                         />
                     </Box>
 
@@ -69,13 +69,13 @@ export default function Navbar() {
                                         letterSpacing: "0.09em",
                                         textTransform: "uppercase",
                                         borderBottom: isActive
-                                            ? `2px solid ${palette.blue}`
+                                            ? `2px solid ${palette.navy}`
                                             : "2px solid transparent",
                                         pb: "4px",
                                         transition: "color 0.2s, border-color 0.2s",
                                         "&:hover": {
                                             color: "white",
-                                            borderBottomColor: "rgba(255,255,255,0.3)",
+                                            borderBottomColor: palette.navy,
                                         },
                                     }}
                                 >
@@ -98,7 +98,7 @@ export default function Navbar() {
                         variant="contained"
                         disableElevation
                         sx={{
-                            backgroundColor: palette.blue,
+                            backgroundColor: palette.navy,
                             color: "white",
                             fontWeight: 700,
                             fontSize: "0.78rem",
