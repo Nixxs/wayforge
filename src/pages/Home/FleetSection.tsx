@@ -1,9 +1,11 @@
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
+import GalleryModal, { type GalleryItem } from "../../components/GalleryModal";
 import BuildIcon from "@mui/icons-material/Build";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import BoltIcon from "@mui/icons-material/Bolt";
@@ -25,6 +27,7 @@ const vehicles = [
         badge: "MANUAL",
         subtitle: "Ideal for small families",
         image: "/reynolds.jpg",
+        gallery: ["/reynolds.jpg", "/reynolds-1.jpg", "/reynolds-2.jpg", "/reynolds-3.jpg", "/reynolds-4.jpg", "/reynolds-5.jpg", "/reynolds-6.jpg"],
         description:
             "The ultimate overlanding icon. Built with a V8 Turbo Diesel and a custom 'Penthouse' roof conversion for two adults.",
         features: [
@@ -42,6 +45,7 @@ const vehicles = [
         badge: "MANUAL",
         subtitle: "Ultimate 2-person touring",
         image: "/nolan.jpg",
+        gallery: ["/nolan.jpg", "/reynolds-1.jpg", "/reynolds-2.jpg", "/reynolds-3.jpg", "/reynolds-4.jpg", "/reynolds-5.jpg", "/reynolds-6.jpg"],
         description:
             "Versatile touring with heavy-duty performance. Features a high-capacity 12V system and modular rear storage.",
         features: [
@@ -57,8 +61,10 @@ const vehicles = [
 ];
 
 export default function FleetSection() {
+    const [activeGallery, setActiveGallery] = useState<GalleryItem | null>(null);
+
     return (
-        <Box sx={{ backgroundColor: palette.grey, py: { xs: 6, md: 10 } }}>
+        <Box sx={{ backgroundColor: palette.cream, py: { xs: 6, md: 10 } }}>
             <Container maxWidth="xl">
                 {/* Section header */}
                 <Box
@@ -136,17 +142,25 @@ export default function FleetSection() {
                                 },
                             }}
                         >
-                            {/* Image */}
+                            {/* Image — click to open gallery */}
                             <Box
-                                component="img"
-                                src={v.image}
-                                alt={v.name}
-                                sx={{
-                                    width: "100%",
-                                    aspectRatio: "16 / 9",
-                                    objectFit: "cover",
-                                }}
-                            />
+                                onClick={() => setActiveGallery({ label: v.name, subtitle: v.subtitle, gallery: v.gallery })}
+                                sx={{ position: "relative", cursor: "pointer", "&:hover .vehicle-img": { transform: "scale(1.04)" }, overflow: "hidden" }}
+                            >
+                                <Box
+                                    className="vehicle-img"
+                                    component="img"
+                                    src={v.image}
+                                    alt={v.name}
+                                    sx={{
+                                        width: "100%",
+                                        aspectRatio: "16 / 9",
+                                        objectFit: "cover",
+                                        display: "block",
+                                        transition: "transform 0.5s ease",
+                                    }}
+                                />
+                            </Box>
 
                             {/* Card body */}
                             <Box sx={{ p: { xs: 3, lg: 4 }, display: "flex", flexDirection: "column", flex: 1, gap: 1.5 }}>
@@ -256,6 +270,8 @@ export default function FleetSection() {
                     ))}
                 </Box>
             </Container>
+
+            <GalleryModal item={activeGallery} onClose={() => setActiveGallery(null)} />
         </Box>
     );
 }

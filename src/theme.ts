@@ -5,6 +5,6 @@ export const palette = {
     tan: "#A49575",
     light: "#D2D9D2",
     accent: "#344D01",
-    cream: "#FFF2DC",
+    cream: "#f1e2c8",
     grey: "#e9e9e9",
 };
