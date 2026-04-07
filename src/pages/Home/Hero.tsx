@@ -94,7 +94,7 @@ export default function Hero() {
                                 mb: 4,
                             }}
                         >
-                            Luxury 70 Series LandCruiser builds for the discerning explorer.
+                            Luxury 70 Series Landcruiser builds for the discerning explorer.
                             The refined comfort of a camper meets the legendary capability of a 4WD.
                         </Typography>
 

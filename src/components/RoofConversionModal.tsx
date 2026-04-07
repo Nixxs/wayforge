@@ -21,7 +21,7 @@ const headspacePoints = [
     "Structural aluminium extrusion frame — built for off-road vibration",
     "Insulated double-skin roof panel for temperature management",
     "Raises and lowers from inside — fully weather protected throughout",
-    "Fitted to Nolan's 78 Series Troop Carrier body",
+    "Fitted to Nolan",
 ];
 
 const alucabPoints = [
@@ -31,7 +31,7 @@ const alucabPoints = [
     "Integrated sleeping platform rises with the roof lid",
     "Folds flat in minutes, sealed against dust and water when closed",
     "Integrated self-supporting gas strut system",
-    "Fitted to Reynolds' 79 Series wagon body",
+    "Fitted to Reynolds",
 ];
 
 export default function RoofConversionModal({ open, onClose }: Props) {

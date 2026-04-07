@@ -80,20 +80,32 @@ export default function GalleryModal({ item, onClose }: GalleryModalProps) {
                     </IconButton>
 
                     {/* Image */}
-                    <Box sx={{ position: "relative", width: "100%", height: { xs: 320, sm: 520, md: 680 }, flexShrink: 0 }}>
+                    <Box
+                        sx={{
+                            position: "relative",
+                            width: "100%",
+                            maxHeight: { xs: "62vh", md: "76vh" },
+                            minHeight: { xs: 200, sm: 280 },
+                            backgroundColor: "rgba(0,0,0,0.35)",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            flexShrink: 0,
+                            overflow: "hidden",
+                        }}
+                    >
                         {item && (
                             <Box
                                 component="img"
                                 src={item.gallery[slideIndex]}
                                 alt={item.label}
                                 sx={{
-                                    position: "absolute",
-                                    inset: 0,
-                                    width: "100%",
-                                    height: "100%",
-                                    objectFit: "cover",
-                                    objectPosition: "center",
                                     display: "block",
+                                    maxWidth: "100%",
+                                    maxHeight: { xs: "62vh", md: "76vh" },
+                                    width: "auto",
+                                    height: "auto",
+                                    objectFit: "contain",
                                 }}
                             />
                         )}

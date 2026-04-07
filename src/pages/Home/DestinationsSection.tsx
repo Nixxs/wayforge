@@ -8,25 +8,25 @@ import { palette } from "../../theme";
 const destinations = [
     {
         label: "Exmouth",
-        subtitle: "Reef, red dirt & open sky",
+        subtitle: "From Ningaloo Reef to Cape Range National Park",
         image: "/dest-exmouth.jpg",
         gallery: ["/dest-exmouth.jpg", "/dest-exmouth-1.jpg", "/dest-exmouth-2.jpg", "/dest-exmouth-3.jpg"],
     },
     {
         label: "Karijini",
-        subtitle: "Ancient gorges & hidden pools",
+        subtitle: "Ancient gorges, hidden pools, Karijini National Park",
         image: "/dest-karajini.jpg",
         gallery: ["/dest-karajini.jpg", "/dest-karajini-1.jpg", "/dest-karajini-2.jpg", "/dest-karajini-3.jpg"],
     },
     {
         label: "Esperance",
-        subtitle: "Pristine beaches & granite peaks",
+        subtitle: "White sand, granite peaks & Cape Le Grand National Park",
         image: "/dest-esperance.jpg",
         gallery: ["/dest-esperance.jpg", "/dest-esperance-1.jpg", "/dest-esperance-2.jpg", "/dest-esperance-3.jpg"],
     },
     {
         label: "Margaret River",
-        subtitle: "Forest tracks & coastal cliffs",
+        subtitle: "Coastal cliffs, forest tracks & Leeuwin–Naturaliste National Park",
         image: "/dest-margaret-river.jpeg",
         gallery: ["/dest-margaret-river.jpeg", "/dest-margaret-river-1.jpg", "/dest-margaret-river-2.jpg", "/dest-margaret-river-3.jpg"],
     },

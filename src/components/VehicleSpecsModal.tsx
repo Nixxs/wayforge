@@ -16,44 +16,65 @@ interface Props {
 const reynolds = {
     name: "Reynolds",
     subtitle: "Family Cruiser",
-    series: "79 Series LandCruiser Wagon",
+    series: "VDJ78 LandCruiser Troop Carrier",
+
     intro:
-        "Reynolds is built for families who refuse to compromise. The 79 Series wagon body gives you room to move, while the Alu-Cab Hercules roof conversion transforms the rear into a full-height living and sleeping space. Dual batteries, a serious fridge, and climate control mean you can park up anywhere and be genuinely comfortable.",
+        "Reynolds is a 2017 VDJ78 Troopy, purpose-built for off-grid family travel. The Alu-Cab Hercules roof conversion creates a full-height living space with a permanent bed above, while a premium interior fitout below provides seating, storage, and a convertible sleeping area for a child. With integrated power, water, and shade systems, it’s a complete touring setup — no towing, no setup, just drive and stay. Perfect for a family getaway.",
+
     specs: [
-        ["Body", "79 Series LandCruiser Wagon"],
+        ["Platform", "2017 VDJ78 LandCruiser Troop Carrier"],
         ["Engine", "4.5L V8 Turbo Diesel (1VD-FTV)"],
         ["Transmission", "Manual"],
-        ["Roof Conversion", "Alu-Cab Hercules"],
-        ["Sleeping", "Queen bed (adults) + child berth"],
-        ["Fridge", "85L compressor fridge/freezer"],
-        ["Solar", "200W rooftop solar"],
-        ["Battery", "120Ah lithium house battery"],
-        ["Water", "60L fresh water tank"],
-        ["Air Con", "Factory air conditioning"],
-        ["Navigation", "GPS navigation system"],
-        ["Recovery", "Rated recovery points"],
+        ["Fuel", "Dual tanks (180L total)"],
+        ["Seating", "2 front seats - 1 rear seat (suitable for adult or child)"],
+        ["Roof Conversion", "Alu-Cab Hercules (full-height)"],
+        ["Sleeping", "Queen bed (roof) + child bed (convertible interior, ~140cm)"],
+        ["Power", "200Ah lithium battery"],
+        ["Fridge", "85L fridge/freezer"],
+        ["Water", "55L tank + filtered drinking tap"],
+        ["Hot Water", "Heat exchanger system (external outlet)"],
+        ["External Access", "Utility panel for water/shower connection"],
+        ["Kitchen", "Full pull-out kitchen drawer with integrated stove + complete cookware/utensils"],
+        ["Interior", "Premium fitout with couch/bed, desk, lighting, and storage"],
+        ["Climate", "Factory air conditioning (cab)"],
+        ["Awning", "270° awning + shower awning"],
+        ["Outdoor", "Camp chairs & table included"],
+        ["Recovery", "Maxtrax recovery boards"],
+        ["Accessories", "Maxtrax table (external mount)"],
+        ["Comms", "CB radio"],
+        ["Audio", "Bluetooth audio (BYO navigation)"],
     ],
 };
 
 const nolan = {
     name: "Nolan",
     subtitle: "Adventure Rig",
-    series: "78 Series LandCruiser Troop Carrier",
+    series: "VDJ78 LandCruiser Troop Carrier",
+
     intro:
-        "Nolan is the more serious off-road machine of the two. The 78 Series Troopy body is legendary for its durability on rough tracks, and the Headspace roof conversion turns it into a proper touring rig. The modular rear fit-out keeps weight central, while the extended range tank and 12V system mean you can push further and stay longer.",
+        "Nolan is a 2014 VDJ78 Troopy, purpose-built for two people to travel further and stay longer. The Headspace Campers roof conversion creates a full-height living space with a permanent bed above, while a premium interior fitout below provides a larger lounge area, expanded storage, and a full-length sleeping setup. With increased water capacity, dual fuel tanks, and integrated off-grid systems, it’s a complete touring setup.",
+
     specs: [
-        ["Body", "78 Series LandCruiser Troop Carrier"],
+        ["Platform", "2014 VDJ78 LandCruiser Troop Carrier (pre-DPF)"],
         ["Engine", "4.5L V8 Turbo Diesel (1VD-FTV)"],
         ["Transmission", "Manual"],
-        ["Roof Conversion", "Headspace Campers"],
-        ["Sleeping", "Queen bed (2 adults)"],
-        ["Fridge", "75L compressor fridge/freezer"],
-        ["Solar", "200W rooftop solar"],
-        ["Battery", "120Ah lithium house battery"],
-        ["Water", "60L fresh water tank"],
-        ["Long Range", "Extended fuel tank"],
-        ["Recovery", "Full recovery kit included"],
-        ["Shower", "Outdoor shower system"],
+        ["Fuel", "Dual tanks (180L total)"],
+        ["Seating", "2 front seats"],
+        ["Roof Conversion", "Headspace Campers premium conversion"],
+        ["Sleeping", "Queen bed (roof) + full-length interior bed"],
+        ["Power", "200Ah lithium battery"],
+        ["Fridge", "85L fridge/freezer"],
+        ["Water", "90L tank + filtered drinking tap"],
+        ["External Access", "Utility panel for water/shower connection"],
+        ["Kitchen", "Full pull-out kitchen drawer with integrated stove + complete cookware/utensils"],
+        ["Interior", "Premium fitout with larger couch/bed, desk, lighting, and expanded storage"],
+        ["Climate", "Factory air conditioning (cab)"],
+        ["Awning", "270° awning"],
+        ["Outdoor", "Camp chairs & table included"],
+        ["Recovery", "Maxtrax recovery boards"],
+        ["Accessories", "Maxtrax table (external mount)"],
+        ["Comms", "CB radio"],
+        ["Audio", "Bluetooth audio (BYO navigation)"],
     ],
 };
 
@@ -213,14 +234,14 @@ export default function VehicleSpecsModal({ open, onClose }: Props) {
             <Divider sx={{ borderColor: "rgba(255,255,255,0.08)", mx: { xs: 3, md: 5 } }} />
 
             <DialogContent sx={{ px: { xs: 2, md: 5 }, py: 3 }}>
-                <Grid container spacing={3} sx={{ flexWrap: "nowrap" }}>
-                    <Grid size={6}>
+                <Grid container spacing={3}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                         <VehicleColumn vehicle={reynolds} />
                     </Grid>
-                    <Grid size="auto" sx={{ display: "flex", justifyContent: "center" }}>
-                        <Divider orientation="vertical" flexItem sx={{ borderColor: "rgba(255,255,255,0.08)" }} />
-                    </Grid>
-                    <Grid size={6}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
+                        <Box sx={{ display: { xs: "block", sm: "none" }, mb: 3 }}>
+                            <Divider sx={{ borderColor: "rgba(255,255,255,0.08)" }} />
+                        </Box>
                         <VehicleColumn vehicle={nolan} />
                     </Grid>
                 </Grid>
