@@ -8,18 +8,13 @@ import Typography from "@mui/material/Typography";
 import GalleryModal, { type GalleryItem } from "../../components/GalleryModal";
 import RoofConversionModal from "../../components/RoofConversionModal";
 import VehicleSpecsModal from "../../components/VehicleSpecsModal";
-import BuildIcon from "@mui/icons-material/Build";
-import DashboardIcon from "@mui/icons-material/Dashboard";
 import BoltIcon from "@mui/icons-material/Bolt";
 import KitchenIcon from "@mui/icons-material/Kitchen";
 import PeopleIcon from "@mui/icons-material/People";
-import SettingsIcon from "@mui/icons-material/Settings";
-import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
-import AirIcon from "@mui/icons-material/Air";
-import MapIcon from "@mui/icons-material/Map";
+import WaterDropIcon from "@mui/icons-material/WaterDrop";
 import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
-import ShowerIcon from "@mui/icons-material/Shower";
+import CollectionsIcon from "@mui/icons-material/Collections";
 import type { SvgIconComponent } from "@mui/icons-material";
 import { palette } from "../../theme";
 
@@ -31,14 +26,14 @@ const vehicles = [
         image: "/reynolds.jpg",
         gallery: ["/reynolds.jpg", "/reynolds-1.jpg", "/reynolds-2.jpg", "/reynolds-3.jpg", "/reynolds-4.jpg", "/reynolds-5.jpg", "/reynolds-6.jpg"],
         description:
-            "The ultimate overlanding icon. Built with a V8 Turbo Diesel and a custom 'Penthouse' roof conversion for two adults.",
+            "A 2017 VDJ78 Troopy built for off-grid family travel. Roof conversion above, premium fitout below - fully self-contained with power, water, and kitchen. Just drive and stay.",
         features: [
             { Icon: PeopleIcon, label: "Sleeps 2 Adults + 1 Child" },
-            { Icon: WbSunnyIcon, label: "Solar Fit-out" },
-            { Icon: KitchenIcon, label: "85L Fridge" },
-            { Icon: SettingsIcon, label: "4.5L V8 Turbo" },
-            { Icon: AirIcon, label: "Air Conditioning" },
-            { Icon: MapIcon, label: "GPS Navigation" },
+            { Icon: KitchenIcon, label: "Pull-out Kitchen + Cookware" },
+            { Icon: BoltIcon, label: "200Ah Battery" },
+            { Icon: WaterDropIcon, label: "55L Water Tank" },
+            { Icon: WorkspacePremiumIcon, label: "Premium Interior Fitout" },
+            { Icon: LocalGasStationIcon, label: "180L Fuel Capacity" },
         ],
         bookingUrl: "https://www.camplify.com.au/rv/151421",
     },
@@ -49,14 +44,14 @@ const vehicles = [
         image: "/nolan.jpg",
         gallery: ["/nolan.jpg", "/reynolds-1.jpg", "/reynolds-2.jpg", "/reynolds-3.jpg", "/reynolds-4.jpg", "/reynolds-5.jpg", "/reynolds-6.jpg"],
         description:
-            "Versatile touring with heavy-duty performance. Features a high-capacity 12V system and modular rear storage.",
+            "A 2014 VDJ78 Troopy built for two people to travel further and stay longer. Roof conversion above, premium fitout below — with more space, storage, and extended range.",
         features: [
-            { Icon: BoltIcon, label: "12V Power" },
-            { Icon: BuildIcon, label: "Recovery Gear" },
-            { Icon: WorkspacePremiumIcon, label: "Premium Fit-out" },
-            { Icon: DashboardIcon, label: "Digital Cockpit" },
-            { Icon: LocalGasStationIcon, label: "Long Range Tank" },
-            { Icon: ShowerIcon, label: "Outdoor Shower" },
+            { Icon: PeopleIcon, label: "Sleeps 2 (Full-Length Bed)" },
+            { Icon: KitchenIcon, label: "Pull-out Kitchen + Cookware" },
+            { Icon: LocalGasStationIcon, label: "180L Fuel Capacity" },
+            { Icon: BoltIcon, label: "200Ah Battery" },
+            { Icon: WaterDropIcon, label: "90L Water Tank" },
+            { Icon: WorkspacePremiumIcon, label: "Premium Fitout + Storage" },
         ],
         bookingUrl: "https://www.camplify.com.au/rv/151421",
     },
@@ -191,7 +186,13 @@ export default function FleetSection() {
                             {/* Image — click to open gallery */}
                             <Box
                                 onClick={() => setActiveGallery({ label: v.name, subtitle: v.subtitle, gallery: v.gallery })}
-                                sx={{ position: "relative", cursor: "pointer", "&:hover .vehicle-img": { transform: "scale(1.04)" }, overflow: "hidden" }}
+                                sx={{
+                                    position: "relative",
+                                    cursor: "pointer",
+                                    "&:hover .vehicle-img": { transform: "scale(1.04)" },
+                                    "&:hover .gallery-overlay": { opacity: 1 },
+                                    overflow: "hidden",
+                                }}
                             >
                                 <Box
                                     className="vehicle-img"
@@ -206,6 +207,49 @@ export default function FleetSection() {
                                         transition: "transform 0.5s ease",
                                     }}
                                 />
+                                {/* Hover overlay */}
+                                <Box
+                                    className="gallery-overlay"
+                                    sx={{
+                                        position: "absolute",
+                                        inset: 0,
+                                        backgroundColor: "rgba(1,31,46,0.5)",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        gap: 1,
+                                        opacity: 0,
+                                        transition: "opacity 0.3s ease",
+                                    }}
+                                >
+                                    <CollectionsIcon sx={{ color: "white", fontSize: "1.3rem" }} />
+                                    <Typography sx={{ color: "white", fontWeight: 700, fontSize: "0.85rem", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+                                        View Gallery
+                                    </Typography>
+                                </Box>
+                                {/* Persistent photo count badge */}
+                                <Box
+                                    sx={{
+                                        position: "absolute",
+                                        bottom: 10,
+                                        right: 12,
+                                        backgroundColor: "rgba(1,31,46,0.62)",
+                                        backdropFilter: "blur(4px)",
+                                        color: "white",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        gap: 0.75,
+                                        px: 1.25,
+                                        py: 0.5,
+                                        borderRadius: 1,
+                                        pointerEvents: "none",
+                                    }}
+                                >
+                                    <CollectionsIcon sx={{ fontSize: "0.85rem" }} />
+                                    <Typography sx={{ fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.06em", color: "white", lineHeight: 1 }}>
+                                        {v.gallery.length} photos
+                                    </Typography>
+                                </Box>
                             </Box>
 
                             {/* Card body */}

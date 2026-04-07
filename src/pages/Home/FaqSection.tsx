@@ -14,7 +14,7 @@ const faqs = [
     },
     {
         question: "Is off-road insurance included?",
-        answer: "Camplify provides a range of protection packages including off-road cover. We recommend selecting their Platinum protection plan for full peace of mind on unsealed roads and remote tracks.",
+        answer: "Camplify provides a range of protection packages including off-road cover. We recommend selecting their Platinum protection plan for full peace of mind on unsealed roads and remote tracks. More remote off-road locations or tracks with water crossings are not covered by insurance, so always check the details of your route before heading out.",
     },
     {
         question: "Where are the handovers located?",
@@ -26,7 +26,7 @@ const faqs = [
     },
     {
         question: "Do I need a special licence to drive?",
-        answer: "No special licence is required — a standard Australian car licence covers all our vehicles. We do recommend experience towing or driving larger 4WDs before heading off road.",
+        answer: "No special licence is required - a standard (Manual) Australian car licence or international driver's license covers all our vehicles. We do recommend experience driving 4WDs before heading off road.",
     },
     {
         question: "What happens if something breaks down?",
