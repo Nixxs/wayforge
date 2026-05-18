@@ -26,18 +26,12 @@ export default function Footer() {
                     <Grid container spacing={{ xs: 5, md: 4 }}>
                         {/* Brand column */}
                         <Grid size={{ xs: 12, md: 3 }}>
-                            <Typography
-                                sx={{
-                                    color: "white",
-                                    fontWeight: 900,
-                                    fontSize: "1.5rem",
-                                    letterSpacing: 2,
-                                    textTransform: "uppercase",
-                                    mb: 2,
-                                }}
-                            >
-                                Wayforge
-                            </Typography>
+                            <Box
+                                component="img"
+                                src="/Wayforge_Logo_White.png"
+                                alt="Wayforge"
+                                sx={{ height: 20, mb: 2 }}
+                            />
                             <Typography
                                 sx={{
                                     color: "rgba(255,255,255,0.5)",
@@ -58,7 +52,6 @@ export default function Footer() {
                                     fontWeight: 700,
                                     fontSize: "0.7rem",
                                     letterSpacing: 2,
-                                    textTransform: "uppercase",
                                     mb: 2.5,
                                 }}
                             >
@@ -77,7 +70,6 @@ export default function Footer() {
                                             color: "rgba(255,255,255,0.6)",
                                             fontSize: "0.78rem",
                                             letterSpacing: 1.5,
-                                            textTransform: "uppercase",
                                             textDecoration: "none",
                                             cursor: "pointer",
                                             "&:hover": { color: "white" },
@@ -98,7 +90,6 @@ export default function Footer() {
                                     fontWeight: 700,
                                     fontSize: "0.7rem",
                                     letterSpacing: 2,
-                                    textTransform: "uppercase",
                                     mb: 2.5,
                                 }}
                             >
@@ -114,7 +105,6 @@ export default function Footer() {
                                         color: "rgba(255,255,255,0.6)",
                                         fontSize: "0.78rem",
                                         letterSpacing: 1.5,
-                                        textTransform: "uppercase",
                                         textDecoration: "none",
                                         "&:hover": { color: "white" },
                                         transition: "color 0.2s",
@@ -128,7 +118,6 @@ export default function Footer() {
                                         color: "rgba(255,255,255,0.6)",
                                         fontSize: "0.78rem",
                                         letterSpacing: 1.5,
-                                        textTransform: "uppercase",
                                         textDecoration: "none",
                                         cursor: "pointer",
                                         "&:hover": { color: "white" },
@@ -148,7 +137,6 @@ export default function Footer() {
                                     fontWeight: 700,
                                     fontSize: "0.7rem",
                                     letterSpacing: 2,
-                                    textTransform: "uppercase",
                                     mb: 2.5,
                                 }}
                             >

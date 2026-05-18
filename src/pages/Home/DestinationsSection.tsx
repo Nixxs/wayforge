@@ -36,31 +36,47 @@ export default function DestinationsSection() {
     const [active, setActive] = useState<GalleryItem | null>(null);
 
     return (
-        <Box id="destinations" sx={{ backgroundColor: palette.darkNavy, py: { xs: 6, md: 10 }, position: "relative", zIndex: 2, boxShadow: "0 -10px 30px rgba(1,31,46,0.4)" }}>
+        <Box
+            id="destinations"
+            sx={{
+                backgroundImage: "linear-gradient(rgba(1,31,46,0.82), rgba(1,31,46,0.82)), url('/pattern-bg-navy.png')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                py: { xs: 6, md: 10 },
+                position: "relative",
+                zIndex: 2,
+                boxShadow: "0 -10px 30px rgba(1,31,46,0.4)",
+            }}
+        >
             <Container maxWidth="xl">
                 {/* Header */}
-                <Box sx={{ mb: { xs: 4, md: 6 }, maxWidth: 520 }}>
+                <Box sx={{ mb: { xs: 4, md: 6 } }}>
                     <Typography
                         component="h2"
                         sx={{
-                            color: "white",
+                            color: palette.light,
                             fontWeight: 900,
-                            textTransform: "uppercase",
                             lineHeight: 1,
-                            fontSize: { xs: "2.4rem", sm: "3.5rem", md: "4.2rem" },
+                            fontSize: { xs: "2rem", sm: "3rem", md: "4rem" },
                             mb: 2,
                         }}
                     >
-                        Experience WA like never before.
+                        Experience WA 
+                        <br />
+                        <Box component="span" sx={{ fontStyle: "italic" }}>
+                        Like Never Before...
+                        </Box>
                     </Typography>
                     <Typography
                         sx={{
-                            color: "rgba(255,255,255,0.6)",
+                            color: palette.light,
                             fontSize: "0.95rem",
                             lineHeight: 1.75,
+                            maxWidth: "50%",
                         }}
                     >
-                        Explore the landscapes our 70 Series builds were made for — engineered for capability, proven in reliability, and built for comfort.
+                        Explore the landscapes our 70 Series builds were made for - engineered for capability, proven in reliability, and built for comfort.
                     </Typography>
                 </Box>
 

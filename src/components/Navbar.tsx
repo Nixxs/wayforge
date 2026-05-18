@@ -1,39 +1,160 @@
+import { useEffect, useMemo, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { Link as RouterLink, useLocation } from "react-router";
+import { Link as RouterLink, useLocation, useNavigate } from "react-router";
 import { palette } from "../theme";
 
 const navLinks: Array<{ label: string; href?: string; scrollId?: string }> = [
-    { label: "HOME", href: "/" },
-    { label: "VEHICLES", scrollId: "fleet" },
-    { label: "DESTINATIONS", scrollId: "destinations" },
+    { label: "Home", href: "/", scrollId: "home" },
+    { label: "Vehicles", scrollId: "fleet" },
+    { label: "Destinations", scrollId: "destinations" },
     { label: "FAQ", scrollId: "faq" },
-    { label: "CONTACT", scrollId: "contact" },
+    { label: "Contact", scrollId: "contact" },
 ];
 
+const NAVBAR_SCROLL_OFFSET = 88;
+
+function getScrollContainer() {
+    return document.getElementById("root") ?? document.documentElement;
+}
+
+function getScrollTop(container: HTMLElement) {
+    return container === document.documentElement ? window.scrollY : container.scrollTop;
+}
+
+function getViewportHeight(container: HTMLElement) {
+    return container === document.documentElement ? window.innerHeight : container.clientHeight;
+}
+
+function getElementTop(element: HTMLElement, container: HTMLElement) {
+    if (container === document.documentElement) {
+        return window.scrollY + element.getBoundingClientRect().top;
+    }
+
+    const containerTop = container.getBoundingClientRect().top;
+    return container.scrollTop + element.getBoundingClientRect().top - containerTop;
+}
+
 function scrollToId(id: string) {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    const element = document.getElementById(id);
+
+    if (!element) {
+        return;
+    }
+
+    const container = getScrollContainer();
+    const elementTop = getElementTop(element, container);
+
+    container.scrollTo({
+        top: Math.max(elementTop - NAVBAR_SCROLL_OFFSET, 0),
+        behavior: "smooth",
+    });
 }
 
 export default function Navbar() {
     const location = useLocation();
+    const navigate = useNavigate();
+    const sectionIds = useMemo(
+        () => navLinks.map((link) => link.scrollId).filter((scrollId): scrollId is string => Boolean(scrollId)),
+        [],
+    );
+    const [activeSection, setActiveSection] = useState(sectionIds[0] ?? "home");
+
+    useEffect(() => {
+        if (location.pathname !== "/") {
+            return;
+        }
+
+        const container = getScrollContainer();
+
+        const updateActiveSection = () => {
+            const scrollTop = getScrollTop(container);
+            const probePosition = scrollTop + NAVBAR_SCROLL_OFFSET + getViewportHeight(container) * 0.3;
+            let nextActiveSection = sectionIds[0] ?? "home";
+
+            sectionIds.forEach((sectionId) => {
+                const element = document.getElementById(sectionId);
+
+                if (!element) {
+                    return;
+                }
+
+                const elementTop = getElementTop(element, container);
+
+                if (probePosition >= elementTop) {
+                    nextActiveSection = sectionId;
+                }
+            });
+
+            setActiveSection(nextActiveSection);
+        };
+
+        let frameId = 0;
+        const handleScroll = () => {
+            if (frameId !== 0) {
+                return;
+            }
+
+            frameId = window.requestAnimationFrame(() => {
+                updateActiveSection();
+                frameId = 0;
+            });
+        };
+
+        updateActiveSection();
+        container.addEventListener("scroll", handleScroll, { passive: true });
+        window.addEventListener("resize", updateActiveSection);
+
+        return () => {
+            container.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("resize", updateActiveSection);
+            if (frameId !== 0) {
+                window.cancelAnimationFrame(frameId);
+            }
+        };
+    }, [location.pathname, sectionIds]);
+
+    useEffect(() => {
+        if (location.pathname !== "/" || !location.hash) {
+            return;
+        }
+
+        const sectionId = location.hash.slice(1);
+        const frameId = window.requestAnimationFrame(() => {
+            setActiveSection(sectionId);
+            scrollToId(sectionId);
+        });
+
+        return () => window.cancelAnimationFrame(frameId);
+    }, [location.hash, location.pathname]);
+
+    const handleNavClick = (scrollId: string) => {
+        setActiveSection(scrollId);
+
+        if (location.pathname !== "/") {
+            navigate(`/#${scrollId}`);
+            return;
+        }
+
+        scrollToId(scrollId);
+    };
 
     return (
         <AppBar
             position="fixed"
             elevation={0}
             sx={{
-                backgroundColor: `${palette.blue}cc`,
+                backgroundColor: `${palette.navy}`,
                 backdropFilter: "blur(12px)",
                 WebkitBackdropFilter: "blur(12px)",
                 zIndex: 1100,
             }}
         >
-            <Container maxWidth="xl">
+            <Container disableGutters maxWidth={false} sx={{ px: 4 }}>
                 <Toolbar disableGutters sx={{ minHeight: { xs: 56, sm: 64 } }}>
                     {/* Logo */}
                     <Box
@@ -43,9 +164,9 @@ export default function Navbar() {
                     >
                         <Box
                             component="img"
-                            src="/Wayforge_Logo_Blue.png"
+                            src="/Wayforge_Logo_White.png"
                             alt="Wayforge"
-                            sx={{ height: 40 }}
+                            sx={{ height: 20 }}
                         />
                     </Box>
 
@@ -59,33 +180,36 @@ export default function Navbar() {
                         }}
                     >
                         {navLinks.map((link) => {
-                            const isActive = link.href ? location.pathname === link.href : false;
+                            const isActive = location.pathname === "/" && link.scrollId
+                                ? activeSection === link.scrollId
+                                : Boolean(link.href && location.pathname === link.href);
                             const linkSx = {
                                 color: isActive ? "white" : "rgba(255,255,255,0.75)",
                                 textDecoration: "none",
                                 fontSize: "0.78rem",
                                 fontWeight: 600,
                                 letterSpacing: "0.09em",
-                                textTransform: "uppercase",
                                 borderBottom: isActive
-                                    ? `2px solid ${palette.navy}`
+                                    ? `2px solid ${palette.light}`
                                     : "2px solid transparent",
                                 pb: "4px",
                                 transition: "color 0.2s, border-color 0.2s",
                                 cursor: "pointer",
                                 "&:hover": {
                                     color: "white",
-                                    borderBottomColor: palette.navy,
+                                    borderBottomColor: palette.blue,
                                 },
                             };
                             const label = (
-                                <Typography sx={{ fontWeight: 600, letterSpacing: "0.09em", textTransform: "uppercase" }}>
+                                <Typography sx={{ fontWeight: 600, letterSpacing: "0.09em" }}>
                                     {link.label}
                                 </Typography>
                             );
                             if (link.scrollId) {
+                                const scrollId = link.scrollId;
+
                                 return (
-                                    <Box key={link.label} onClick={() => scrollToId(link.scrollId!)} sx={linkSx}>
+                                    <Box key={link.label} onClick={() => handleNavClick(scrollId)} sx={linkSx}>
                                         {label}
                                     </Box>
                                 );
@@ -106,13 +230,13 @@ export default function Navbar() {
                         target="_blank"
                         rel="noopener noreferrer"
                         sx={{
-                            backgroundColor: palette.navy,
+                            backgroundColor: palette.blue,
                             color: "white",
-                            fontWeight: 700,
+                            fontWeight: 600,
                             fontSize: "0.78rem",
                             letterSpacing: "0.1em",
                             textTransform: "uppercase",
-                            borderRadius: 1,
+                            borderRadius: 10,
                             px: 3,
                             py: 1,
                             flexShrink: 0,

@@ -34,6 +34,21 @@ const alucabPoints = [
     "Fitted to Reynolds",
 ];
 
+const troopyImages = [
+    {
+        src: "/troopy_closed_roof.png",
+        alt: "Troopy roof conversion with roof lowered",
+    },
+    {
+        src: "/troopy_sleeping_space.png",
+        alt: "Troopy roof conversion sleeping platform",
+    },
+    {
+        src: "/troopy_full_interior.png",
+        alt: "Troopy roof conversion with full standing interior height",
+    }
+];
+
 export default function RoofConversionModal({ open, onClose }: Props) {
     return (
         <Dialog
@@ -123,6 +138,31 @@ export default function RoofConversionModal({ open, onClose }: Props) {
                         </Typography>
                         , keeping you completely protected from rain, wind, dust, and insects at every step.
                     </Typography>
+
+                    <Box
+                        sx={{
+                            display: "grid",
+                            gridTemplateColumns: { xs: "1fr", sm: "repeat(3, minmax(0, 1fr))" },
+                            gap: 1.5,
+                            mt: 2.5,
+                        }}
+                    >
+                        {troopyImages.map((image) => (
+                            <Box
+                                key={image.src}
+                                component="img"
+                                src={image.src}
+                                alt={image.alt}
+                                sx={{
+                                    width: "100%",
+                                    aspectRatio: "4 / 3",
+                                    objectFit: "cover",
+                                    borderRadius: 1,
+                                    display: "block",
+                                }}
+                            />
+                        ))}
+                    </Box>
                 </Box>
 
                 {/* Two column conversion specs */}

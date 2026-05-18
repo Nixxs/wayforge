@@ -10,6 +10,7 @@ export default function Hero() {
         <>
             {/* Hero Section */}
             <Box
+                id="home"
                 sx={{
                     position: "relative",
                     height: "100vh",
@@ -23,7 +24,7 @@ export default function Hero() {
                 {/* Background image — drop your hero image at /public/hero.jpg */}
                 <Box
                     component="img"
-                    src="/forrest.jpg"
+                    src="/forrest-hero.jpg"
                     alt=""
                     aria-hidden="true"
                     sx={{
@@ -36,61 +37,47 @@ export default function Hero() {
                     }}
                 />
 
-                {/* Gradient overlay: navy on the left, fading to transparent */}
-                <Box
-                    sx={{
-                        position: "absolute",
-                        inset: 0,
-                        background: `linear-gradient(
-                            to right,
-                            ${palette.darkNavy}f0 0%,
-                            ${palette.darkNavy}cc 25%,
-                            ${palette.darkNavy}77 50%,
-                            ${palette.darkNavy}22 72%,
-                            transparent 100%
-                        )`,
-                    }}
-                />
-
                 {/* Hero content */}
                 <Container
-                    maxWidth="xl"
-                    sx={{ position: "relative", zIndex: 1, py: { xs: 6, md: 0 } }}
+                    disableGutters
+                    maxWidth={false}
+                    sx={{ position: "relative", zIndex: 1, py: { xs: 6, md: 0 }, px: 4 }}
                 >
-                    <Box sx={{ maxWidth: { xs: "100%", md: 620 } }}>
+                    <Box sx={{ maxWidth: "100%" }}>
                         <Typography
                             component="h1"
                             sx={{
-                                color: "white",
-                                fontWeight: 900,
-                                textTransform: "uppercase",
+                                color: palette.light,
+                                fontWeight: 700,
                                 lineHeight: 1,
-                                fontSize: { xs: "3rem", sm: "4.5rem", md: "5.5rem", lg: "6.5rem" },
+                                fontSize: { xs: "2.5rem", sm: "4.0rem", md: "5.0rem", lg: "6.0rem" },
                             }}
                         >
-                            ELITE TOURING.
+                            Elite Touring
                         </Typography>
 
                         <Typography
                             component="h1"
                             sx={{
-                                color: palette.blue,
-                                fontWeight: 900,
-                                textTransform: "uppercase",
+                                color: palette.light,
+                                fontWeight: 700,
                                 lineHeight: 1,
-                                fontSize: { xs: "3rem", sm: "4.5rem", md: "5.5rem", lg: "6.5rem" },
+                                fontSize: { xs: "2.5rem", sm: "4.0rem", md: "5.0rem", lg: "6.0rem" },
                                 mb: 3,
                             }}
                         >
-                            UNRESTRICTED FREEDOM.
+                            <Box component="span" sx={{ fontStyle: "italic" }}>
+                                Unrestricted
+                            </Box>{" "}
+                            Freedom
                         </Typography>
 
                         <Typography
                             sx={{
                                 color: "rgba(255,255,255,0.82)",
-                                fontSize: { xs: "0.95rem", sm: "1.05rem" },
+                                fontSize: { xs: "0.9rem", sm: "1.1rem" },
                                 lineHeight: 1.75,
-                                maxWidth: 420,
+                                maxWidth: 480,
                                 mb: 4,
                             }}
                         >
@@ -104,7 +91,7 @@ export default function Hero() {
                             onClick={() => document.getElementById("fleet")?.scrollIntoView({ behavior: "smooth" })}
                             sx={{
                                 backgroundColor: palette.navy,
-                                border: "1.5px solid rgba(255,255,255,0.35)",
+                                // border: "1.5px solid rgba(255,255,255,0.35)",
                                 borderRadius: 1,
                                 color: "white",
                                 fontWeight: 700,

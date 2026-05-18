@@ -63,7 +63,16 @@ export default function FleetSection() {
     const [specsOpen, setSpecsOpen] = useState(false);
 
     return (
-        <Box id="fleet" sx={{ backgroundColor: palette.cream, py: { xs: 6, md: 10 } }}>
+        <Box
+            id="fleet"
+            sx={{
+                backgroundImage: `linear-gradient(#f1e2c885, #f1e2c885), url('/pattern-bg-tan-tr.png')`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                py: { xs: 6, md: 10 },
+            }}
+        >
             <RoofConversionModal open={roofOpen} onClose={() => setRoofOpen(false)} />
             <VehicleSpecsModal open={specsOpen} onClose={() => setSpecsOpen(false)} />
             <Container maxWidth="xl">
@@ -106,23 +115,6 @@ export default function FleetSection() {
                         {/* Modal quick-links */}
                         <Box sx={{ display: "flex", gap: 3, mb: { xs: 1, md: 2 }, mt: { xs: 1, md: 3 }, flexWrap: "wrap" }}>
                             <Typography
-                                onClick={() => setSpecsOpen(true)}
-                                sx={{
-                                    cursor: "pointer",
-                                    color: palette.navy,
-                                    fontSize: "0.78rem",
-                                    fontWeight: 700,
-                                    letterSpacing: "0.1em",
-                                    textTransform: "uppercase",
-                                    borderBottom: `2px solid ${palette.blue}`,
-                                    pb: "2px",
-                                    transition: "opacity 0.2s",
-                                    "&:hover": { opacity: 0.7 },
-                                }}
-                            >
-                                View Full Specifications
-                            </Typography>
-                            <Typography
                                 onClick={() => setRoofOpen(true)}
                                 sx={{
                                     cursor: "pointer",
@@ -147,7 +139,7 @@ export default function FleetSection() {
                             fontSize: "0.8rem",
                             maxWidth: 320,
                             lineHeight: 1.65,
-                            textAlign: { xs: "left", md: "right" },
+                            textAlign: "left",
                             mb: { xs: 2, md: 4 },
                         }}
                     >
@@ -304,6 +296,20 @@ export default function FleetSection() {
                                     }}
                                 >
                                     {v.description}
+                                </Typography>
+                                <Typography
+                                    onClick={() => setSpecsOpen(true)}
+                                    sx={{
+                                        cursor: "pointer",
+                                        color: palette.navy,
+                                        fontSize: "0.78rem",
+                                        fontWeight: 700,
+                                        pb: "2px",
+                                        transition: "opacity 0.2s",
+                                        "&:hover": { opacity: 0.7 },
+                                    }}
+                                >
+                                    View Full Specifications
                                 </Typography>
 
                                 <Divider sx={{ my: 0.5, borderColor: "rgba(0,0,0,0.07)" }} />
