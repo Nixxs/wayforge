@@ -154,7 +154,7 @@ export default function Navbar() {
                 zIndex: 1100,
             }}
         >
-            <Container maxWidth="xl">
+            <Container disableGutters maxWidth={false} sx={{ px: 4 }}>
                 <Toolbar disableGutters sx={{ minHeight: { xs: 56, sm: 64 } }}>
                     {/* Logo */}
                     <Box

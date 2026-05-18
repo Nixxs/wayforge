@@ -63,7 +63,16 @@ export default function FleetSection() {
     const [specsOpen, setSpecsOpen] = useState(false);
 
     return (
-        <Box id="fleet" sx={{ backgroundColor: palette.cream, py: { xs: 6, md: 10 } }}>
+        <Box
+            id="fleet"
+            sx={{
+                backgroundImage: `linear-gradient(#f1e2c885, #f1e2c885), url('/pattern-bg-tan-tr.png')`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                py: { xs: 6, md: 10 },
+            }}
+        >
             <RoofConversionModal open={roofOpen} onClose={() => setRoofOpen(false)} />
             <VehicleSpecsModal open={specsOpen} onClose={() => setSpecsOpen(false)} />
             <Container maxWidth="xl">
@@ -147,7 +156,7 @@ export default function FleetSection() {
                             fontSize: "0.8rem",
                             maxWidth: 320,
                             lineHeight: 1.65,
-                            textAlign: { xs: "left", md: "right" },
+                            textAlign: "left",
                             mb: { xs: 2, md: 4 },
                         }}
                     >

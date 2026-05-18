@@ -4,37 +4,47 @@ import { palette } from "../../theme";
 
 const cards = [
     {
-        tag: "THE LIMITATIONS",
+        tag: "4WD FREEDOM",
         tagColor: palette.blue,
-        heading: "Caravan: Locked to the Bitumen.",
-        image: "/caravan.jpg",
-        body: "Comfortable, but constrained. Caravans keep you tied to sealed roads, powered sites, crowded parks and towing - always close to access, never deep in it.",
+        heading: "Go Further With True 4WD Capability.",
+        image: "/forrest.jpg",
+        points: [
+            "Built on the legendary 70 Series platform.",
+            "Confident off-road capability beyond the bitumen.",
+            "Access quieter camps and more remote tracks.",
+        ],
         bg: palette.navy,
         headingColor: palette.light,
-        bodyColor: palette.light,
-        imageFilter: "grayscale(100%)",
+        bodyColor: palette.light
     },
     {
-        tag: "THE SOLUTION",
+        tag: "PREMIUM TOURING",
         tagColor: palette.navy,
         heading: "Wayforge: Go Further. Stay Better.",
         image: "/the_evolution.jpg",
-        body: "A roof-converted 70 Series Landcruiser with a premium interior - fully self-contained with water, power, and a permanent living space. No towing. No setup. Just drive and stay.",
+        points: [
+            "Premium interior with integrated living space.",
+            "Self-contained with water, power, and storage.",
+            "No towing, no setup, just drive and stay.",
+        ],
         bg: palette.blue,
         headingColor: "#ffffff",
         bodyColor: "rgba(255,255,255,0.72)",
         imageFilter: "none",
     },
     {
-        tag: "THE INCONVENIENCE",
+        tag: "COMFORT IN CAMP",
         tagColor: palette.blue,
-        heading: "Tent/Swag: Freedom, Without Comfort.",
-        image: "/tent.jpg",
-        body: "Go anywhere, but pay for it every night. Setup, pack-down, weather exposure - the constant friction turns travel into work.",
+        heading: "Stay Comfortable Long After You Arrive.",
+        image: "/reynolds-2.jpg",
+        points: [
+            "Refined interior designed for extended touring.",
+            "Permanent sleeping space ready when you arrive.",
+            "Integrated living setup for comfort at camp.",
+        ],
         bg: palette.navy,
         headingColor: palette.light,
-        bodyColor: palette.light,
-        imageFilter: "grayscale(100%)",
+        bodyColor: palette.light
     },
 ];
 
@@ -100,15 +110,22 @@ export default function ComparisonSection() {
                     />
 
                     {/* Body */}
-                    <Typography
-                        sx={{
-                            color: card.bodyColor,
-                            fontSize: "0.9rem",
-                            lineHeight: 1.75,
-                        }}
-                    >
-                        {card.body}
-                    </Typography>
+                    <Box component="ul" sx={{ color: card.bodyColor, pl: 2.5, m: 0 }}>
+                        {card.points.map((point) => (
+                            <Typography
+                                key={point}
+                                component="li"
+                                sx={{
+                                    color: card.bodyColor,
+                                    fontSize: "0.9rem",
+                                    lineHeight: 1.75,
+                                    mb: 0.5,
+                                }}
+                            >
+                                {point}
+                            </Typography>
+                        ))}
+                    </Box>
                 </Box>
             ))}
         </Box>
