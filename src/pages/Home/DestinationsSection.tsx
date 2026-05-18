@@ -55,7 +55,7 @@ export default function DestinationsSection() {
                     <Typography
                         component="h2"
                         sx={{
-                            color: "white",
+                            color: palette.light,
                             fontWeight: 900,
                             lineHeight: 1,
                             fontSize: { xs: "2rem", sm: "3rem", md: "4rem" },

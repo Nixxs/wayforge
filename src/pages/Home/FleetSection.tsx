@@ -115,23 +115,6 @@ export default function FleetSection() {
                         {/* Modal quick-links */}
                         <Box sx={{ display: "flex", gap: 3, mb: { xs: 1, md: 2 }, mt: { xs: 1, md: 3 }, flexWrap: "wrap" }}>
                             <Typography
-                                onClick={() => setSpecsOpen(true)}
-                                sx={{
-                                    cursor: "pointer",
-                                    color: palette.navy,
-                                    fontSize: "0.78rem",
-                                    fontWeight: 700,
-                                    letterSpacing: "0.1em",
-                                    textTransform: "uppercase",
-                                    borderBottom: `2px solid ${palette.blue}`,
-                                    pb: "2px",
-                                    transition: "opacity 0.2s",
-                                    "&:hover": { opacity: 0.7 },
-                                }}
-                            >
-                                View Full Specifications
-                            </Typography>
-                            <Typography
                                 onClick={() => setRoofOpen(true)}
                                 sx={{
                                     cursor: "pointer",
@@ -313,6 +296,20 @@ export default function FleetSection() {
                                     }}
                                 >
                                     {v.description}
+                                </Typography>
+                                <Typography
+                                    onClick={() => setSpecsOpen(true)}
+                                    sx={{
+                                        cursor: "pointer",
+                                        color: palette.navy,
+                                        fontSize: "0.78rem",
+                                        fontWeight: 700,
+                                        pb: "2px",
+                                        transition: "opacity 0.2s",
+                                        "&:hover": { opacity: 0.7 },
+                                    }}
+                                >
+                                    View Full Specifications
                                 </Typography>
 
                                 <Divider sx={{ my: 0.5, borderColor: "rgba(0,0,0,0.07)" }} />
