@@ -10,6 +10,7 @@ export default function Hero() {
         <>
             {/* Hero Section */}
             <Box
+                id="home"
                 sx={{
                     position: "relative",
                     height: "100vh",

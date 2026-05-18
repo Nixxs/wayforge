@@ -11,6 +11,10 @@ html, body, #root {
   overflow-x: hidden;
 }
 
+body {
+  font-family: "Aileron", sans-serif;
+}
+
 /* Hide scrollbar globally */
 * {
   -ms-overflow-style: none;  /* IE/Edge */
