@@ -24,7 +24,7 @@ export default function Hero() {
                 {/* Background image — drop your hero image at /public/hero.jpg */}
                 <Box
                     component="img"
-                    src="/forrest-hero.jpg"
+                    src="/outback-hero-aerial-dark-2.jpg"
                     alt=""
                     aria-hidden="true"
                     sx={{
@@ -47,7 +47,7 @@ export default function Hero() {
                         <Typography
                             component="h1"
                             sx={{
-                                color: palette.light,
+                                color: "white",
                                 fontWeight: 700,
                                 lineHeight: 1,
                                 fontSize: { xs: "2.5rem", sm: "4.0rem", md: "5.0rem", lg: "6.0rem" },
@@ -59,14 +59,14 @@ export default function Hero() {
                         <Typography
                             component="h1"
                             sx={{
-                                color: palette.light,
+                                color: "white",
                                 fontWeight: 700,
                                 lineHeight: 1,
                                 fontSize: { xs: "2.5rem", sm: "4.0rem", md: "5.0rem", lg: "6.0rem" },
                                 mb: 3,
                             }}
                         >
-                            <Box component="span" sx={{ fontStyle: "italic" }}>
+                            <Box component="span" sx={{ fontStyle: "italic"}}>
                                 Unrestricted
                             </Box>{" "}
                             Freedom
@@ -74,7 +74,7 @@ export default function Hero() {
 
                         <Typography
                             sx={{
-                                color: "rgba(255,255,255,0.82)",
+                                color: "white",
                                 fontSize: { xs: "0.9rem", sm: "1.1rem" },
                                 lineHeight: 1.75,
                                 maxWidth: 480,
