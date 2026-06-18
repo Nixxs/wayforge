@@ -7,7 +7,7 @@ const cards = [
         tag: "4WD FREEDOM",
         tagColor: palette.blue,
         heading: "Go Further With True 4WD Capability.",
-        image: "/forrest.jpg",
+        image: "/reynolds-kennedy-ranges.jpg",
         points: [
             "Built on the legendary 70 Series platform.",
             "Confident off-road capability beyond the bitumen.",
