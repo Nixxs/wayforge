@@ -148,10 +148,10 @@ export default function Footer() {
                                 </Typography>
                                 <Typography
                                     component="a"
-                                    href="tel:+61400000000"
+                                    href="tel:+61 427 697 836"
                                     sx={{ color: "rgba(255,255,255,0.55)", fontSize: "0.83rem", textDecoration: "none", "&:hover": { color: "white" }, transition: "color 0.2s" }}
                                 >
-                                    +61 400 000 000
+                                    +61 427 697 836
                                 </Typography>
                                 <Typography
                                     component="a"
