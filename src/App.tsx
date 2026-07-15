@@ -5,21 +5,21 @@ import NotFound from './pages/NotFound'
 import Layout from './components/Layout'
 import './App.css'
 
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+import '@fontsource/aileron/400.css';
+import '@fontsource/aileron/600.css';
+import '@fontsource/aileron/700.css';
+import '@fontsource/aileron/800.css';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element:<Layout />,
+    element: <Layout />,
     children: [
       {
-        path:"/",
-        element:<Home />,
+        path: "/",
+        element: <Home />,
       },
-      {path:"*",element:<NotFound />}
+      { path: "*", element: <NotFound /> }
     ]
   }
 ]);

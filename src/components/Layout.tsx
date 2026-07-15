@@ -1,21 +1,23 @@
-import {styled} from "@mui/material/styles";
-import {Outlet} from "react-router";
+import { styled } from "@mui/material/styles";
+import { Outlet } from "react-router";
+import Navbar from "./Navbar";
 
 const Root = styled("div")({
     display: "flex",
     flexDirection: "column",
-    minHeight: "100vh"
+    minHeight: "100vh",
 });
 
 const Main = styled("div")({
     flex: 1,
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
 });
 
 function Layout() {
     return (
         <Root>
+            <Navbar />
             <Main>
                 <Outlet />
             </Main>
