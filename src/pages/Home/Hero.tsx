@@ -37,6 +37,19 @@ export default function Hero() {
                     }}
                 />
 
+                {/* Left-to-right gradient fade — above image, below text */}
+                <Box
+                    aria-hidden="true"
+                    sx={{
+                        position: "absolute",
+                        inset: 0,
+                        zIndex: 0,
+                        background:
+                            "linear-gradient(90deg, rgba(1,16,24,0.85) 0%, rgba(1,16,24,0.45) 25%, rgba(1,16,24,0) 50%)",
+                        pointerEvents: "none",
+                    }}
+                />
+
                 {/* Hero content */}
                 <Container
                     disableGutters

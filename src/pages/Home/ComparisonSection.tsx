@@ -21,7 +21,7 @@ const cards = [
         tag: "PREMIUM TOURING",
         tagColor: palette.navy,
         heading: "Wayforge: Go Further. Stay Better.",
-        image: "/the_evolution.jpg",
+        image: "/nolan-19.jpg",
         points: [
             "Premium interior with integrated living space.",
             "Self-contained with water, power, and storage.",
@@ -31,6 +31,7 @@ const cards = [
         headingColor: "#ffffff",
         bodyColor: "rgba(255,255,255,0.72)",
         imageFilter: "none",
+        imagePosition: "center 0%",
     },
     {
         tag: "COMFORT IN CAMP",
@@ -105,6 +106,7 @@ export default function ComparisonSection() {
                             width: "100%",
                             aspectRatio: "16 / 9",
                             objectFit: "cover",
+                            objectPosition: card.imagePosition ?? "center",
                             filter: card.imageFilter,
                         }}
                     />

@@ -23,8 +23,8 @@ const vehicles = [
         name: "Reynolds (Family Cruiser)",
         badge: "MANUAL",
         subtitle: "Ideal for small families",
-        image: "/reynolds.jpg",
-        gallery: ["/reynolds.jpg", "/reynolds-1.jpg", "/reynolds-2.jpg", "/reynolds-3.jpg", "/reynolds-4.jpg", "/reynolds-5.jpg", "/reynolds-6.jpg"],
+        image: "/reynolds-1.jpg",
+        gallery: ["/reynolds-1.jpg", "/reynolds-2.jpg", "/reynolds-3.jpg", "/reynolds-4.jpg", "/reynolds-5.jpg", "/reynolds-6.jpg", "/reynolds-7.jpg", "/reynolds-8.jpg", "/reynolds-9.jpg", "/reynolds-10.jpg", "/reynolds-11.jpg", "/reynolds-12.jpg", "/reynolds-13.jpg", "/reynolds-14.jpg"],
         description:
             "A 2017 VDJ78 Troopy built for off-grid family travel. Roof conversion above, premium fitout below - fully self-contained with power, water, and kitchen. Just drive and stay.",
         features: [
@@ -41,8 +41,8 @@ const vehicles = [
         name: "Nolan (Adventure Rig)",
         badge: "MANUAL",
         subtitle: "Ultimate 2-person touring",
-        image: "/nolan.jpg",
-        gallery: ["/nolan.jpg", "/reynolds-1.jpg", "/reynolds-2.jpg", "/reynolds-3.jpg", "/reynolds-4.jpg", "/reynolds-5.jpg", "/reynolds-6.jpg"],
+        image: "/nolan-hero.jpg",
+        gallery: ["/nolan-hero.jpg", "/nolan-2.jpg", "/nolan-3.jpg", "/nolan-4.jpg", "/nolan-5.jpg", "/nolan-6.jpg", "/nolan-7.jpg", "/nolan-8.jpg", "/nolan-9.jpg", "/nolan-10.jpg", "/nolan-11.jpg", "/nolan-12.jpg", "/nolan-13.jpg", "/nolan-14.jpg", "/nolan-15.jpg", "/nolan-16.jpg", "/nolan-17.jpg", "/nolan-18.jpg"],
         description:
             "A 2014 VDJ78 Troopy built for two people to travel further and stay longer. Roof conversion above, premium fitout below — with more space, storage, and extended range.",
         features: [
@@ -53,7 +53,7 @@ const vehicles = [
             { Icon: WaterDropIcon, label: "90L Water Tank" },
             { Icon: WorkspacePremiumIcon, label: "Premium Fitout + Storage" },
         ],
-        bookingUrl: "https://www.camplify.com.au/rv/151421",
+        bookingUrl: "https://www.camplify.com.au/rv/156164",
     },
 ];
 
