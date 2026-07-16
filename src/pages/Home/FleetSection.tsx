@@ -24,7 +24,7 @@ const vehicles = [
         badge: "MANUAL",
         subtitle: "Ideal for small families",
         image: "/reynolds-1.jpg",
-        gallery: ["/reynolds-1.jpg", "/reynolds-2.jpg", "/reynolds-3.jpg", "/reynolds-4.jpg", "/reynolds-5.jpg", "/reynolds-6.jpg", "/reynolds-7.jpg", "/reynolds-8.jpg", "/reynolds-9.jpg", "/reynolds-10.jpg", "/reynolds-11.jpg", "/reynolds-12.jpg", "/reynolds-13.jpg", "/reynolds-14.jpg"],
+        gallery: ["/reynolds-1.jpg", "/reynolds-2.jpg", "/reynolds-3.jpg", "/reynolds-4.jpg", "/reynolds-5.jpg", "/reynolds-6.jpg", "/reynolds-7.jpg", "/reynolds-8.jpg", "/reynolds-9.jpg", "/reynolds-10.jpg", "/reynolds-11.jpg", "/reynolds-12.jpg", "/reynolds-13.jpg", "/reynolds-14.jpg", "/reynolds-15.jpg"],
         description:
             "A 2017 VDJ78 Troopy built for off-grid family travel. Roof conversion above, premium fitout below - fully self-contained with power, water, and kitchen. Just drive and stay.",
         features: [
