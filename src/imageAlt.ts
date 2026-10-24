@@ -25,7 +25,7 @@ export const imageAlt: Partial<Record<ImageName, string>> = {
     // Nolan — 2014 VDJ78, Headspace Campers roof conversion
     "nolan-hero": "Toyota LandCruiser Troopy with Headspace Campers roof conversion raised on beach sand at golden hour",
     "nolan-2": "Close-up of the raised Headspace Campers pop-top roof with canvas sides and rolled awning",
-    "nolan-3": "VDJ78 Troop Carrier with 270-degree awning extended over the open rear doors",
+    "nolan-3": "VDJ78 Troopcarrier with 270-degree awning extended over the open rear doors",
     "nolan-4": "Fold-down side table and external water tap on a LandCruiser Troopcarrier",
     "nolan-5": "Dashboard and manual gearstick of a VDJ78 LandCruiser, looking out to a white sand beach",
     "nolan-6": "Odyssey Custom Fitouts Troopy interior: bench seat, Bushman fridge cabinet and timber-lined ceiling",
@@ -39,7 +39,7 @@ export const imageAlt: Partial<Record<ImageName, string>> = {
     "nolan-14": "Fold-down rear door table set with mugs, bowls, knives, chopping board and cooking utensils",
     "nolan-15": "12-volt oven built into the Odyssey Custom Fitouts cabinetry beside the cab",
     "nolan-16": "Spares and consumables bags with engine oil, coolant, oil filter and toilet paper",
-    "nolan-17": "External utility panel with Anderson power plug, air fitting and water connections",
+    "nolan-17": "Troopcarrier External utility panel with Anderson power plug, air fitting and water connections",
     "nolan-18": "Side hatch storage on a Troop Carrier holding a hose, extension lead and toiletries",
     "nolan-19": "Side profile of a LandCruiser Troopy with Headspace roof raised among coastal sand dunes at sunset",
 
