@@ -102,6 +102,7 @@ export default function FleetSection() {
                         </Typography>
                         <Typography
                             variant="h3"
+                            component="h2"
                             sx={{
                                 color: palette.navy,
                                 fontWeight: 900,
@@ -115,8 +116,13 @@ export default function FleetSection() {
                         {/* Modal quick-links */}
                         <Box sx={{ display: "flex", gap: 3, mb: { xs: 1, md: 2 }, mt: { xs: 1, md: 3 }, flexWrap: "wrap" }}>
                             <Typography
+                                component="button"
+                                type="button"
                                 onClick={() => setRoofOpen(true)}
                                 sx={{
+                                    p: 0,
+                                    border: 0,
+                                    background: "none",
                                     cursor: "pointer",
                                     color: palette.navy,
                                     fontSize: "0.78rem",
@@ -250,6 +256,7 @@ export default function FleetSection() {
                                 <Box sx={{ display: "flex", alignItems: "center", gap: 2, flexWrap: "wrap" }}>
                                     <Typography
                                         variant="h5"
+                                        component="h3"
                                         sx={{
                                             fontWeight: 800,
                                             color: palette.navy,
@@ -298,8 +305,15 @@ export default function FleetSection() {
                                     {v.description}
                                 </Typography>
                                 <Typography
+                                    component="button"
+                                    type="button"
                                     onClick={() => setSpecsOpen(true)}
                                     sx={{
+                                        alignSelf: "flex-start",
+                                        p: 0,
+                                        border: 0,
+                                        background: "none",
+                                        textAlign: "left",
                                         cursor: "pointer",
                                         color: palette.navy,
                                         fontSize: "0.78rem",

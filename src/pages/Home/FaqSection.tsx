@@ -82,14 +82,12 @@ export default function FaqSection() {
                     {faqs.map((faq, i) => (
                         <Box
                             key={faq.question}
-                            onClick={() => toggle(i)}
                             sx={{
                                 backgroundColor: "#fdf6e3",
                                 border: `1px solid rgba(1,57,84,0.10)`,
                                 borderRadius: 1,
                                 px: { xs: 3, md: 4 },
                                 py: 3,
-                                cursor: "pointer",
                                 transition: "box-shadow 0.2s",
                                 boxShadow: openIndex === i
                                     ? "0 4px 20px rgba(1,31,46,0.10)"
@@ -99,23 +97,53 @@ export default function FaqSection() {
                                 },
                             }}
                         >
-                            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 2 }}>
-                                <Typography
+                            <Box component="h3" sx={{ m: 0 }}>
+                                <Box
+                                    component="button"
+                                    type="button"
+                                    id={`faq-question-${i}`}
+                                    aria-expanded={openIndex === i}
+                                    aria-controls={`faq-answer-${i}`}
+                                    onClick={() => toggle(i)}
                                     sx={{
-                                        color: palette.darkNavy,
-                                        fontWeight: 700,
-                                        fontSize: { xs: "0.95rem", md: "1.05rem" },
-                                        lineHeight: 1.4,
+                                        width: "100%",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "space-between",
+                                        gap: 2,
+                                        p: 0,
+                                        border: 0,
+                                        background: "none",
+                                        font: "inherit",
+                                        textAlign: "left",
+                                        cursor: "pointer",
                                     }}
                                 >
-                                    {faq.question}
-                                </Typography>
-                                <Box sx={{ color: palette.navy, flexShrink: 0 }}>
-                                    {openIndex === i ? <RemoveIcon fontSize="small" /> : <AddIcon fontSize="small" />}
+                                    <Typography
+                                        component="span"
+                                        sx={{
+                                            color: palette.darkNavy,
+                                            fontWeight: 700,
+                                            fontSize: { xs: "0.95rem", md: "1.05rem" },
+                                            lineHeight: 1.4,
+                                        }}
+                                    >
+                                        {faq.question}
+                                    </Typography>
+                                    <Box component="span" sx={{ color: palette.navy, flexShrink: 0, display: "flex" }}>
+                                        {openIndex === i ? <RemoveIcon fontSize="small" /> : <AddIcon fontSize="small" />}
+                                    </Box>
                                 </Box>
                             </Box>
 
-                            <Collapse in={openIndex === i} timeout="auto" unmountOnExit>
+                            {/* Answers stay mounted so crawlers can read them while collapsed */}
+                            <Collapse
+                                in={openIndex === i}
+                                timeout="auto"
+                                id={`faq-answer-${i}`}
+                                role="region"
+                                aria-labelledby={`faq-question-${i}`}
+                            >
                                 <Typography
                                     sx={{
                                         color: "#666",

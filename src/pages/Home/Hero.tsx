@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { palette } from "../../theme";
+import { scrollToId } from "../../utils/scroll";
 
 
 export default function Hero() {
@@ -64,25 +65,18 @@ export default function Hero() {
                                 fontWeight: 700,
                                 lineHeight: 1,
                                 fontSize: { xs: "2.5rem", sm: "4.0rem", md: "5.0rem", lg: "6.0rem" },
-                            }}
-                        >
-                            Elite Touring
-                        </Typography>
-
-                        <Typography
-                            component="h1"
-                            sx={{
-                                color: "white",
-                                fontWeight: 700,
-                                lineHeight: 1,
-                                fontSize: { xs: "2.5rem", sm: "4.0rem", md: "5.0rem", lg: "6.0rem" },
                                 mb: 3,
                             }}
                         >
-                            <Box component="span" sx={{ fontStyle: "italic"}}>
-                                Unrestricted
+                            <Box component="span" sx={{ display: "block" }}>
+                                Elite Touring
                             </Box>{" "}
-                            Freedom
+                            <Box component="span" sx={{ display: "block" }}>
+                                <Box component="span" sx={{ fontStyle: "italic"}}>
+                                    Unrestricted
+                                </Box>{" "}
+                                Freedom
+                            </Box>
                         </Typography>
 
                         <Typography
@@ -101,7 +95,11 @@ export default function Hero() {
                         <Button
                             variant="contained"
                             disableElevation
-                            onClick={() => document.getElementById("fleet")?.scrollIntoView({ behavior: "smooth" })}
+                            href="#fleet"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                scrollToId("fleet");
+                            }}
                             sx={{
                                 backgroundColor: palette.navy,
                                 // border: "1.5px solid rgba(255,255,255,0.35)",

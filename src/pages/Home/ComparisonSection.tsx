@@ -87,6 +87,7 @@ export default function ComparisonSection() {
                     {/* Heading */}
                     <Typography
                         variant="h5"
+                        component="h2"
                         sx={{
                             color: card.headingColor,
                             fontWeight: 800,

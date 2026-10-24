@@ -8,7 +8,7 @@ const Root = styled("div")({
     minHeight: "100vh",
 });
 
-const Main = styled("div")({
+const Main = styled("main")({
     flex: 1,
     display: "flex",
     flexDirection: "column",
