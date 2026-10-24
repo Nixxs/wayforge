@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState, type KeyboardEvent } from "react";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Modal from "@mui/material/Modal";
@@ -7,11 +7,13 @@ import CloseIcon from "@mui/icons-material/Close";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { palette } from "../theme";
+import { imageAlt } from "../imageAlt";
+import { imageSources, type ImageName } from "../utils/images";
 
 export interface GalleryItem {
     label: string;
     subtitle?: string;
-    gallery: string[];
+    gallery: readonly ImageName[];
 }
 
 interface GalleryModalProps {
@@ -19,8 +21,47 @@ interface GalleryModalProps {
     onClose: () => void;
 }
 
+// Matches the modal width below, so the browser picks a variant close to the displayed size
+const GALLERY_SIZES = "(min-width: 1200px) 70vw, (min-width: 900px) 80vw, 95vw";
+const STAGE_HEIGHT = { xs: "62vh", md: "76vh" };
+
+const visuallyHidden = {
+    position: "absolute",
+    width: 1,
+    height: 1,
+    m: "-1px",
+    p: 0,
+    border: 0,
+    overflow: "hidden",
+    clip: "rect(0 0 0 0)",
+    whiteSpace: "nowrap",
+} as const;
+
+const navButtonSx = {
+    position: "absolute",
+    top: "50%",
+    transform: "translateY(-50%)",
+    color: "white",
+    backgroundColor: "rgba(0,0,0,0.4)",
+    "&:hover": { backgroundColor: "rgba(0,0,0,0.65)" },
+} as const;
+
+function preload(name: ImageName) {
+    const img = new Image();
+    img.sizes = GALLERY_SIZES;
+    img.srcset = imageSources(name).srcSet;
+}
+
 export default function GalleryModal({ item, onClose }: GalleryModalProps) {
     const [slideIndex, setSlideIndex] = useState(0);
+    const count = item?.gallery.length ?? 0;
+
+    // Warm the neighbouring slides so prev/next don't wait on a fresh download
+    useEffect(() => {
+        if (!item || count < 2) return;
+        preload(item.gallery[(slideIndex + 1) % count]);
+        preload(item.gallery[(slideIndex - 1 + count) % count]);
+    }, [item, slideIndex, count]);
 
     function handleOpen() {
         setSlideIndex(0);
@@ -28,16 +69,23 @@ export default function GalleryModal({ item, onClose }: GalleryModalProps) {
 
     function prev() {
         if (!item) return;
-        setSlideIndex((i) => (i - 1 + item.gallery.length) % item.gallery.length);
+        setSlideIndex((i) => (i - 1 + count) % count);
     }
 
     function next() {
         if (!item) return;
-        setSlideIndex((i) => (i + 1) % item.gallery.length);
+        setSlideIndex((i) => (i + 1) % count);
     }
 
+    function handleKeyDown(e: KeyboardEvent) {
+        if (e.key === "ArrowLeft") prev();
+        if (e.key === "ArrowRight") next();
+    }
+
+    const slide = item ? imageSources(item.gallery[slideIndex]) : null;
+
     return (
-        <Modal open={!!item} onClose={onClose} onTransitionEnter={handleOpen}>
+        <Modal open={!!item} onClose={onClose} onTransitionEnter={handleOpen} aria-labelledby="gallery-title">
             <Box
                 sx={{
                     position: "fixed",
@@ -49,6 +97,7 @@ export default function GalleryModal({ item, onClose }: GalleryModalProps) {
                     outline: "none",
                 }}
                 onClick={onClose}
+                onKeyDown={handleKeyDown}
             >
                 <Box
                     onClick={(e) => e.stopPropagation()}
@@ -66,6 +115,7 @@ export default function GalleryModal({ item, onClose }: GalleryModalProps) {
                     {/* Close */}
                     <IconButton
                         onClick={onClose}
+                        aria-label="Close gallery"
                         sx={{
                             position: "absolute",
                             top: 10,
@@ -79,13 +129,12 @@ export default function GalleryModal({ item, onClose }: GalleryModalProps) {
                         <CloseIcon fontSize="small" />
                     </IconButton>
 
-                    {/* Image */}
+                    {/* Image — fixed-height stage so portrait/landscape slides don't shift the controls */}
                     <Box
                         sx={{
                             position: "relative",
                             width: "100%",
-                            maxHeight: { xs: "62vh", md: "76vh" },
-                            minHeight: { xs: 200, sm: 280 },
+                            height: STAGE_HEIGHT,
                             backgroundColor: "rgba(0,0,0,0.35)",
                             display: "flex",
                             alignItems: "center",
@@ -94,15 +143,17 @@ export default function GalleryModal({ item, onClose }: GalleryModalProps) {
                             overflow: "hidden",
                         }}
                     >
-                        {item && (
+                        {item && slide && (
                             <Box
                                 component="img"
-                                src={item.gallery[slideIndex]}
-                                alt={item.label}
+                                src={slide.src}
+                                srcSet={slide.srcSet}
+                                sizes={GALLERY_SIZES}
+                                alt={imageAlt[item.gallery[slideIndex]] ?? `${item.label} — photo ${slideIndex + 1} of ${count}`}
                                 sx={{
                                     display: "block",
                                     maxWidth: "100%",
-                                    maxHeight: { xs: "62vh", md: "76vh" },
+                                    maxHeight: "100%",
                                     width: "auto",
                                     height: "auto",
                                     objectFit: "contain",
@@ -110,33 +161,11 @@ export default function GalleryModal({ item, onClose }: GalleryModalProps) {
                             />
                         )}
 
-                        <IconButton
-                            onClick={prev}
-                            sx={{
-                                position: "absolute",
-                                left: 12,
-                                top: "50%",
-                                transform: "translateY(-50%)",
-                                color: "white",
-                                backgroundColor: "rgba(0,0,0,0.4)",
-                                "&:hover": { backgroundColor: "rgba(0,0,0,0.65)" },
-                            }}
-                        >
+                        <IconButton onClick={prev} aria-label="Previous photo" sx={{ ...navButtonSx, left: 12 }}>
                             <ArrowBackIosNewIcon fontSize="small" />
                         </IconButton>
 
-                        <IconButton
-                            onClick={next}
-                            sx={{
-                                position: "absolute",
-                                right: 12,
-                                top: "50%",
-                                transform: "translateY(-50%)",
-                                color: "white",
-                                backgroundColor: "rgba(0,0,0,0.4)",
-                                "&:hover": { backgroundColor: "rgba(0,0,0,0.65)" },
-                            }}
-                        >
+                        <IconButton onClick={next} aria-label="Next photo" sx={{ ...navButtonSx, right: 12 }}>
                             <ArrowForwardIosIcon fontSize="small" />
                         </IconButton>
                     </Box>
@@ -153,7 +182,7 @@ export default function GalleryModal({ item, onClose }: GalleryModalProps) {
                         }}
                     >
                         <Box>
-                            <Typography sx={{ color: "white", fontWeight: 700, fontSize: "1rem" }}>
+                            <Typography id="gallery-title" sx={{ color: "white", fontWeight: 700, fontSize: "1rem" }}>
                                 {item?.label}
                             </Typography>
                             {item?.subtitle && (
@@ -161,22 +190,39 @@ export default function GalleryModal({ item, onClose }: GalleryModalProps) {
                                     {item.subtitle}
                                 </Typography>
                             )}
+                            <Box sx={visuallyHidden} aria-live="polite">
+                                {item && `Photo ${slideIndex + 1} of ${count}`}
+                            </Box>
                         </Box>
 
-                        <Box sx={{ display: "flex", gap: 1, flexShrink: 0 }}>
+                        <Box sx={{ display: "flex", flexShrink: 0, flexWrap: "wrap", justifyContent: "flex-end" }}>
                             {item?.gallery.map((_, i) => (
                                 <Box
                                     key={i}
+                                    component="button"
+                                    type="button"
                                     onClick={() => setSlideIndex(i)}
+                                    aria-label={`Show photo ${i + 1}`}
+                                    aria-current={i === slideIndex ? "true" : undefined}
                                     sx={{
-                                        width: i === slideIndex ? 20 : 8,
-                                        height: 8,
-                                        borderRadius: 4,
-                                        backgroundColor: i === slideIndex ? "white" : "rgba(255,255,255,0.3)",
+                                        p: "8px 4px",
+                                        border: 0,
+                                        background: "none",
                                         cursor: "pointer",
-                                        transition: "width 0.2s, background-color 0.2s",
+                                        display: "flex",
                                     }}
-                                />
+                                >
+                                    <Box
+                                        component="span"
+                                        sx={{
+                                            width: i === slideIndex ? 20 : 8,
+                                            height: 8,
+                                            borderRadius: 4,
+                                            backgroundColor: i === slideIndex ? "white" : "rgba(255,255,255,0.3)",
+                                            transition: "width 0.2s, background-color 0.2s",
+                                        }}
+                                    />
+                                </Box>
                             ))}
                         </Box>
                     </Box>

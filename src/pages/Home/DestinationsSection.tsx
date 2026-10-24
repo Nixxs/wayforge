@@ -3,34 +3,36 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import GalleryModal, { type GalleryItem } from "../../components/GalleryModal";
+import { imageAlt } from "../../imageAlt";
 import { palette } from "../../theme";
+import { imageSources, imageUrl } from "../../utils/images";
 
 const destinations = [
     {
         label: "Exmouth",
         subtitle: "From Ningaloo Reef to Cape Range National Park",
-        image: "/dest-exmouth.jpg",
-        gallery: ["/dest-exmouth.jpg", "/dest-exmouth-1.jpg", "/dest-exmouth-2.jpg", "/dest-exmouth-3.jpg"],
+        image: "dest-exmouth",
+        gallery: ["dest-exmouth", "dest-exmouth-1", "dest-exmouth-2", "dest-exmouth-3"],
     },
     {
         label: "Karijini",
         subtitle: "Ancient gorges, hidden pools, Karijini National Park",
-        image: "/dest-karajini.jpg",
-        gallery: ["/dest-karajini.jpg", "/dest-karajini-1.jpg", "/dest-karajini-2.jpg", "/dest-karajini-3.jpg"],
+        image: "dest-karajini",
+        gallery: ["dest-karajini", "dest-karajini-1", "dest-karajini-2", "dest-karajini-3"],
     },
     {
         label: "Esperance",
         subtitle: "White sand, granite peaks & Cape Le Grand National Park",
-        image: "/dest-esperance.jpg",
-        gallery: ["/dest-esperance.jpg", "/dest-esperance-1.jpg", "/dest-esperance-2.jpg", "/dest-esperance-3.jpg"],
+        image: "dest-esperance",
+        gallery: ["dest-esperance", "dest-esperance-1", "dest-esperance-2", "dest-esperance-3"],
     },
     {
         label: "Margaret River",
         subtitle: "Coastal cliffs, forest tracks & Leeuwin–Naturaliste National Park",
-        image: "/dest-margaret-river.jpeg",
-        gallery: ["/dest-margaret-river.jpeg", "/dest-margaret-river-1.jpg", "/dest-margaret-river-2.jpg", "/dest-margaret-river-3.jpg"],
+        image: "dest-margaret-river",
+        gallery: ["dest-margaret-river", "dest-margaret-river-1", "dest-margaret-river-2", "dest-margaret-river-3"],
     },
-];
+] as const;
 
 export default function DestinationsSection() {
     const [active, setActive] = useState<GalleryItem | null>(null);
@@ -39,7 +41,7 @@ export default function DestinationsSection() {
         <Box
             id="destinations"
             sx={{
-                backgroundImage: "linear-gradient(rgba(1,31,46,0.82), rgba(1,31,46,0.82)), url('/pattern-bg-navy.png')",
+                backgroundImage: `linear-gradient(rgba(1,31,46,0.82), rgba(1,31,46,0.82)), url('${imageUrl("pattern-bg-navy")}')`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
@@ -91,9 +93,18 @@ export default function DestinationsSection() {
                     {destinations.map((d) => (
                         <Box
                             key={d.label}
+                            component="button"
+                            type="button"
+                            aria-label={`View ${d.label} gallery`}
                             onClick={() => setActive(d)}
                             sx={{
                                 position: "relative",
+                                display: "block",
+                                width: "100%",
+                                p: 0,
+                                border: 0,
+                                background: "none",
+                                textAlign: "left",
                                 aspectRatio: "3 / 4",
                                 overflow: "hidden",
                                 cursor: "pointer",
@@ -103,8 +114,10 @@ export default function DestinationsSection() {
                             <Box
                                 className="dest-img"
                                 component="img"
-                                src={d.image}
-                                alt={d.label}
+                                {...imageSources(d.image)}
+                                sizes="(min-width: 900px) 25vw, 50vw"
+                                loading="lazy"
+                                alt={imageAlt[d.image] ?? d.label}
                                 sx={{
                                     position: "absolute",
                                     inset: 0,
@@ -115,15 +128,18 @@ export default function DestinationsSection() {
                                 }}
                             />
                             <Box
+                                component="span"
                                 sx={{
                                     position: "absolute",
                                     inset: 0,
                                     background: "linear-gradient(to top, rgba(1,31,46,0.85) 0%, rgba(1,31,46,0.2) 45%, transparent 100%)",
                                 }}
                             />
-                            <Box sx={{ position: "absolute", bottom: 16, left: 16, right: 16 }}>
+                            <Box component="span" sx={{ position: "absolute", bottom: 16, left: 16, right: 16 }}>
                                 <Typography
+                                    component="span"
                                     sx={{
+                                        display: "block",
                                         color: "white",
                                         fontWeight: 700,
                                         fontSize: { xs: "0.85rem", md: "1rem" },
@@ -135,7 +151,9 @@ export default function DestinationsSection() {
                                     {d.label}
                                 </Typography>
                                 <Typography
+                                    component="span"
                                     sx={{
+                                        display: "block",
                                         color: "rgba(255,255,255,0.6)",
                                         fontSize: { xs: "0.7rem", md: "0.78rem" },
                                         fontWeight: 400,

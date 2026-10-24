@@ -10,6 +10,25 @@ import { palette } from "../../theme";
 import TermsModal from "../../components/TermsModal";
 import RoofConversionModal from "../../components/RoofConversionModal";
 import VehicleSpecsModal from "../../components/VehicleSpecsModal";
+import { scrollToId } from "../../utils/scroll";
+
+const footerLinkSx = {
+    color: "rgba(255,255,255,0.6)",
+    fontSize: "0.78rem",
+    letterSpacing: 1.5,
+    textDecoration: "none",
+    cursor: "pointer",
+    "&:hover": { color: "white" },
+    transition: "color 0.2s",
+};
+
+const footerButtonSx = {
+    ...footerLinkSx,
+    p: 0,
+    border: 0,
+    background: "none",
+    textAlign: "left",
+} as const;
 
 export default function Footer() {
     const [termsOpen, setTermsOpen] = useState(false);
@@ -17,7 +36,7 @@ export default function Footer() {
     const [specsOpen, setSpecsOpen] = useState(false);
 
     return (
-        <Box id="contact" sx={{ backgroundColor: palette.navy }}>
+        <Box id="contact" component="footer" sx={{ backgroundColor: palette.navy }}>
             <TermsModal open={termsOpen} onClose={() => setTermsOpen(false)} />
             <RoofConversionModal open={roofOpen} onClose={() => setRoofOpen(false)} />
             <VehicleSpecsModal open={specsOpen} onClose={() => setSpecsOpen(false)} />
@@ -58,23 +77,27 @@ export default function Footer() {
                                 The Fleet
                             </Typography>
                             <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
+                                <Typography
+                                    component="a"
+                                    href="#fleet"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        scrollToId("fleet");
+                                    }}
+                                    sx={footerLinkSx}
+                                >
+                                    Vehicle Fleet
+                                </Typography>
                                 {([
-                                    { label: "Vehicle Fleet", action: () => document.getElementById("fleet")?.scrollIntoView({ behavior: "smooth" }) },
                                     { label: "Troopy Roof Conversion", action: () => setRoofOpen(true) },
                                     { label: "Vehicle Specs", action: () => setSpecsOpen(true) },
                                 ] as const).map(({ label, action }) => (
                                     <Typography
                                         key={label}
+                                        component="button"
+                                        type="button"
                                         onClick={action}
-                                        sx={{
-                                            color: "rgba(255,255,255,0.6)",
-                                            fontSize: "0.78rem",
-                                            letterSpacing: 1.5,
-                                            textDecoration: "none",
-                                            cursor: "pointer",
-                                            "&:hover": { color: "white" },
-                                            transition: "color 0.2s",
-                                        }}
+                                        sx={footerButtonSx}
                                     >
                                         {label}
                                     </Typography>
@@ -113,16 +136,10 @@ export default function Footer() {
                                     Camplify Booking
                                 </Typography>
                                 <Typography
+                                    component="button"
+                                    type="button"
                                     onClick={() => setTermsOpen(true)}
-                                    sx={{
-                                        color: "rgba(255,255,255,0.6)",
-                                        fontSize: "0.78rem",
-                                        letterSpacing: 1.5,
-                                        textDecoration: "none",
-                                        cursor: "pointer",
-                                        "&:hover": { color: "white" },
-                                        transition: "color 0.2s",
-                                    }}
+                                    sx={footerButtonSx}
                                 >
                                     Terms of Service
                                 </Typography>
@@ -206,7 +223,7 @@ export default function Footer() {
                             textTransform: "uppercase",
                         }}
                     >
-                        © 2025 Wayforge Campers. Rugged curation for the modern explorer.
+                        © {new Date().getFullYear()} Wayforge Campers. Rugged curation for the modern explorer.
                     </Typography>
                 </Box>
             </Container>

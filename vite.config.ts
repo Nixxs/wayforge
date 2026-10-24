@@ -9,4 +9,9 @@ export default defineConfig({
       usePolling: true,
     },
   },
+  ssr: {
+    // The SSR build only runs at build time to prerender; bundle deps so Node never
+    // has to resolve MUI/Emotion ESM or CSS imports itself
+    noExternal: true,
+  },
 })

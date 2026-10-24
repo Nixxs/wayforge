@@ -1,13 +1,28 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { imageAlt } from "../../imageAlt";
 import { palette } from "../../theme";
+import { imageSources, type ImageName } from "../../utils/images";
 
-const cards = [
+interface ComparisonCard {
+    tag: string;
+    tagColor: string;
+    heading: string;
+    image: ImageName;
+    points: string[];
+    bg: string;
+    headingColor: string;
+    bodyColor: string;
+    imageFilter?: string;
+    imagePosition?: string;
+}
+
+const cards: ComparisonCard[] = [
     {
         tag: "4WD FREEDOM",
         tagColor: palette.blue,
         heading: "Go Further With True 4WD Capability.",
-        image: "/reynolds-kennedy-ranges.jpg",
+        image: "reynolds-kennedy-ranges",
         points: [
             "Built on the legendary 70 Series platform.",
             "Confident off-road capability beyond the bitumen.",
@@ -21,7 +36,7 @@ const cards = [
         tag: "PREMIUM TOURING",
         tagColor: palette.navy,
         heading: "Wayforge: Go Further. Stay Better.",
-        image: "/nolan-19.jpg",
+        image: "nolan-19",
         points: [
             "Premium interior with integrated living space.",
             "Self-contained with water, power, and storage.",
@@ -37,7 +52,7 @@ const cards = [
         tag: "COMFORT IN CAMP",
         tagColor: palette.blue,
         heading: "Stay Comfortable Long After You Arrive.",
-        image: "/aerial.jpg",
+        image: "aerial",
         points: [
             "270° awning creates a generous shaded outdoor living area.",
             "Excellent ventilation keeps the cabin comfortable.",
@@ -87,6 +102,7 @@ export default function ComparisonSection() {
                     {/* Heading */}
                     <Typography
                         variant="h5"
+                        component="h2"
                         sx={{
                             color: card.headingColor,
                             fontWeight: 800,
@@ -100,10 +116,13 @@ export default function ComparisonSection() {
                     {/* Image */}
                     <Box
                         component="img"
-                        src={card.image}
-                        alt={card.heading}
+                        {...imageSources(card.image)}
+                        sizes="(min-width: 900px) 33vw, 100vw"
+                        loading="lazy"
+                        alt={imageAlt[card.image] ?? card.heading}
                         sx={{
                             width: "100%",
+                            height: "auto",
                             aspectRatio: "16 / 9",
                             objectFit: "cover",
                             objectPosition: card.imagePosition ?? "center",

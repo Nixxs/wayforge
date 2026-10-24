@@ -16,15 +16,17 @@ import WaterDropIcon from "@mui/icons-material/WaterDrop";
 import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
 import CollectionsIcon from "@mui/icons-material/Collections";
 import type { SvgIconComponent } from "@mui/icons-material";
+import { imageAlt } from "../../imageAlt";
 import { palette } from "../../theme";
+import { imageSources, imageUrl } from "../../utils/images";
 
 const vehicles = [
     {
         name: "Reynolds (Family Cruiser)",
         badge: "MANUAL",
         subtitle: "Ideal for small families",
-        image: "/reynolds-1.jpg",
-        gallery: ["/reynolds-1.jpg", "/reynolds-2.jpg", "/reynolds-3.jpg", "/reynolds-4.jpg", "/reynolds-5.jpg", "/reynolds-6.jpg", "/reynolds-7.jpg", "/reynolds-8.jpg", "/reynolds-9.jpg", "/reynolds-10.jpg", "/reynolds-11.jpg", "/reynolds-12.jpg", "/reynolds-13.jpg", "/reynolds-14.jpg", "/reynolds-15.jpg"],
+        image: "reynolds-1",
+        gallery: ["reynolds-1", "reynolds-2", "reynolds-3", "reynolds-4", "reynolds-5", "reynolds-6", "reynolds-7", "reynolds-8", "reynolds-9", "reynolds-10", "reynolds-11", "reynolds-12", "reynolds-13", "reynolds-14", "reynolds-15"],
         description:
             "A 2017 VDJ78 Troopy built for off-grid family travel. Roof conversion above, premium fitout below - fully self-contained with power, water, and kitchen. Just drive and stay.",
         features: [
@@ -41,8 +43,8 @@ const vehicles = [
         name: "Nolan (Adventure Rig)",
         badge: "MANUAL",
         subtitle: "Ultimate 2-person touring",
-        image: "/nolan-hero.jpg",
-        gallery: ["/nolan-hero.jpg", "/nolan-2.jpg", "/nolan-3.jpg", "/nolan-4.jpg", "/nolan-5.jpg", "/nolan-6.jpg", "/nolan-7.jpg", "/nolan-8.jpg", "/nolan-9.jpg", "/nolan-10.jpg", "/nolan-11.jpg", "/nolan-12.jpg", "/nolan-13.jpg", "/nolan-14.jpg", "/nolan-15.jpg", "/nolan-16.jpg", "/nolan-17.jpg", "/nolan-18.jpg"],
+        image: "nolan-hero",
+        gallery: ["nolan-hero", "nolan-2", "nolan-3", "nolan-4", "nolan-5", "nolan-6", "nolan-7", "nolan-8", "nolan-9", "nolan-10", "nolan-11", "nolan-12", "nolan-13", "nolan-14", "nolan-15", "nolan-16", "nolan-17", "nolan-18"],
         description:
             "A 2014 VDJ78 Troopy built for two people to travel further and stay longer. Roof conversion above, premium fitout below — with more space, storage, and extended range.",
         features: [
@@ -55,7 +57,7 @@ const vehicles = [
         ],
         bookingUrl: "https://www.camplify.com.au/rv/156164",
     },
-];
+] as const;
 
 export default function FleetSection() {
     const [activeGallery, setActiveGallery] = useState<GalleryItem | null>(null);
@@ -66,7 +68,7 @@ export default function FleetSection() {
         <Box
             id="fleet"
             sx={{
-                backgroundImage: `linear-gradient(#f1e2c885, #f1e2c885), url('/pattern-bg-tan-tr.png')`,
+                backgroundImage: `linear-gradient(#f1e2c885, #f1e2c885), url('${imageUrl("pattern-bg-tan-tr")}')`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
@@ -102,6 +104,7 @@ export default function FleetSection() {
                         </Typography>
                         <Typography
                             variant="h3"
+                            component="h2"
                             sx={{
                                 color: palette.navy,
                                 fontWeight: 900,
@@ -115,8 +118,13 @@ export default function FleetSection() {
                         {/* Modal quick-links */}
                         <Box sx={{ display: "flex", gap: 3, mb: { xs: 1, md: 2 }, mt: { xs: 1, md: 3 }, flexWrap: "wrap" }}>
                             <Typography
+                                component="button"
+                                type="button"
                                 onClick={() => setRoofOpen(true)}
                                 sx={{
+                                    p: 0,
+                                    border: 0,
+                                    background: "none",
                                     cursor: "pointer",
                                     color: palette.navy,
                                     fontSize: "0.78rem",
@@ -177,22 +185,33 @@ export default function FleetSection() {
                         >
                             {/* Image — click to open gallery */}
                             <Box
+                                component="button"
+                                type="button"
+                                aria-label={`View ${v.name} gallery, ${v.gallery.length} photos`}
                                 onClick={() => setActiveGallery({ label: v.name, subtitle: v.subtitle, gallery: v.gallery })}
                                 sx={{
                                     position: "relative",
+                                    display: "block",
+                                    width: "100%",
+                                    p: 0,
+                                    border: 0,
+                                    background: "none",
                                     cursor: "pointer",
                                     "&:hover .vehicle-img": { transform: "scale(1.04)" },
-                                    "&:hover .gallery-overlay": { opacity: 1 },
+                                    "&:hover .gallery-overlay, &:focus-visible .gallery-overlay": { opacity: 1 },
                                     overflow: "hidden",
                                 }}
                             >
                                 <Box
                                     className="vehicle-img"
                                     component="img"
-                                    src={v.image}
-                                    alt={v.name}
+                                    {...imageSources(v.image)}
+                                    sizes="(min-width: 900px) 50vw, 100vw"
+                                    loading="lazy"
+                                    alt={imageAlt[v.image] ?? v.name}
                                     sx={{
                                         width: "100%",
+                                        height: "auto",
                                         aspectRatio: "16 / 9",
                                         objectFit: "cover",
                                         display: "block",
@@ -201,6 +220,7 @@ export default function FleetSection() {
                                 />
                                 {/* Hover overlay */}
                                 <Box
+                                    component="span"
                                     className="gallery-overlay"
                                     sx={{
                                         position: "absolute",
@@ -215,12 +235,13 @@ export default function FleetSection() {
                                     }}
                                 >
                                     <CollectionsIcon sx={{ color: "white", fontSize: "1.3rem" }} />
-                                    <Typography sx={{ color: "white", fontWeight: 700, fontSize: "0.85rem", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+                                    <Typography component="span" sx={{ color: "white", fontWeight: 700, fontSize: "0.85rem", letterSpacing: "0.12em", textTransform: "uppercase" }}>
                                         View Gallery
                                     </Typography>
                                 </Box>
                                 {/* Persistent photo count badge */}
                                 <Box
+                                    component="span"
                                     sx={{
                                         position: "absolute",
                                         bottom: 10,
@@ -238,7 +259,7 @@ export default function FleetSection() {
                                     }}
                                 >
                                     <CollectionsIcon sx={{ fontSize: "0.85rem" }} />
-                                    <Typography sx={{ fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.06em", color: "white", lineHeight: 1 }}>
+                                    <Typography component="span" sx={{ fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.06em", color: "white", lineHeight: 1 }}>
                                         {v.gallery.length} photos
                                     </Typography>
                                 </Box>
@@ -250,6 +271,7 @@ export default function FleetSection() {
                                 <Box sx={{ display: "flex", alignItems: "center", gap: 2, flexWrap: "wrap" }}>
                                     <Typography
                                         variant="h5"
+                                        component="h3"
                                         sx={{
                                             fontWeight: 800,
                                             color: palette.navy,
@@ -298,8 +320,15 @@ export default function FleetSection() {
                                     {v.description}
                                 </Typography>
                                 <Typography
+                                    component="button"
+                                    type="button"
                                     onClick={() => setSpecsOpen(true)}
                                     sx={{
+                                        alignSelf: "flex-start",
+                                        p: 0,
+                                        border: 0,
+                                        background: "none",
+                                        textAlign: "left",
                                         cursor: "pointer",
                                         color: palette.navy,
                                         fontSize: "0.78rem",

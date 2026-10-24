@@ -7,6 +7,14 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router";
 import { palette } from "../theme";
+import {
+    NAVBAR_SCROLL_OFFSET,
+    getElementTop,
+    getScrollContainer,
+    getScrollTop,
+    getViewportHeight,
+    scrollToId,
+} from "../utils/scroll";
 
 const navLinks: Array<{ label: string; href?: string; scrollId?: string }> = [
     { label: "Home", href: "/", scrollId: "home" },
@@ -15,45 +23,6 @@ const navLinks: Array<{ label: string; href?: string; scrollId?: string }> = [
     { label: "FAQ", scrollId: "faq" },
     { label: "Contact", scrollId: "contact" },
 ];
-
-const NAVBAR_SCROLL_OFFSET = 88;
-
-function getScrollContainer() {
-    return document.getElementById("root") ?? document.documentElement;
-}
-
-function getScrollTop(container: HTMLElement) {
-    return container === document.documentElement ? window.scrollY : container.scrollTop;
-}
-
-function getViewportHeight(container: HTMLElement) {
-    return container === document.documentElement ? window.innerHeight : container.clientHeight;
-}
-
-function getElementTop(element: HTMLElement, container: HTMLElement) {
-    if (container === document.documentElement) {
-        return window.scrollY + element.getBoundingClientRect().top;
-    }
-
-    const containerTop = container.getBoundingClientRect().top;
-    return container.scrollTop + element.getBoundingClientRect().top - containerTop;
-}
-
-function scrollToId(id: string) {
-    const element = document.getElementById(id);
-
-    if (!element) {
-        return;
-    }
-
-    const container = getScrollContainer();
-    const elementTop = getElementTop(element, container);
-
-    container.scrollTo({
-        top: Math.max(elementTop - NAVBAR_SCROLL_OFFSET, 0),
-        behavior: "smooth",
-    });
-}
 
 export default function Navbar() {
     const location = useLocation();
@@ -172,6 +141,8 @@ export default function Navbar() {
 
                     {/* Nav links */}
                     <Box
+                        component="nav"
+                        aria-label="Main"
                         sx={{
                             flex: 1,
                             display: { xs: "none", md: "flex" },
@@ -209,7 +180,16 @@ export default function Navbar() {
                                 const scrollId = link.scrollId;
 
                                 return (
-                                    <Box key={link.label} onClick={() => handleNavClick(scrollId)} sx={linkSx}>
+                                    <Box
+                                        key={link.label}
+                                        component="a"
+                                        href={`/#${scrollId}`}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            handleNavClick(scrollId);
+                                        }}
+                                        sx={linkSx}
+                                    >
                                         {label}
                                     </Box>
                                 );
