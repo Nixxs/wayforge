@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { palette } from "../../theme";
+import { imageUrl } from "../../utils/images";
 
 const faqs = [
     {
@@ -43,7 +44,7 @@ export default function FaqSection() {
 
     return (
         <Box id="faq" sx={{ 
-            backgroundImage: `linear-gradient(#f1e2c885, #f1e2c885), url('/pattern-bg-tan-bl.png')`,
+            backgroundImage: `linear-gradient(#f1e2c885, #f1e2c885), url('${imageUrl("pattern-bg-tan-bl")}')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",

@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { palette } from "../../theme";
+import { imageSources } from "../../utils/images";
 import { scrollToId } from "../../utils/scroll";
 
 
@@ -22,10 +23,12 @@ export default function Hero() {
                     alignItems: "center",
                 }}
             >
-                {/* Background image — drop your hero image at /public/hero.jpg */}
+                {/* Background image */}
                 <Box
                     component="img"
-                    src="/outback-hero-aerial-dark-2.jpg"
+                    {...imageSources("outback-hero-aerial-dark-2")}
+                    sizes="100vw"
+                    fetchPriority="high"
                     alt=""
                     aria-hidden="true"
                     sx={{
