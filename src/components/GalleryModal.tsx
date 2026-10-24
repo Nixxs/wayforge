@@ -7,6 +7,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { palette } from "../theme";
+import { imageAlt } from "../imageAlt";
 import { imageSources, type ImageName } from "../utils/images";
 
 export interface GalleryItem {
@@ -148,7 +149,7 @@ export default function GalleryModal({ item, onClose }: GalleryModalProps) {
                                 src={slide.src}
                                 srcSet={slide.srcSet}
                                 sizes={GALLERY_SIZES}
-                                alt={`${item.label} — photo ${slideIndex + 1} of ${count}`}
+                                alt={imageAlt[item.gallery[slideIndex]] ?? `${item.label} — photo ${slideIndex + 1} of ${count}`}
                                 sx={{
                                     display: "block",
                                     maxWidth: "100%",

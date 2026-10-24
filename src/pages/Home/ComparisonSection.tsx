@@ -1,5 +1,6 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { imageAlt } from "../../imageAlt";
 import { palette } from "../../theme";
 import { imageSources, type ImageName } from "../../utils/images";
 
@@ -118,7 +119,7 @@ export default function ComparisonSection() {
                         {...imageSources(card.image)}
                         sizes="(min-width: 900px) 33vw, 100vw"
                         loading="lazy"
-                        alt={card.heading}
+                        alt={imageAlt[card.image] ?? card.heading}
                         sx={{
                             width: "100%",
                             height: "auto",

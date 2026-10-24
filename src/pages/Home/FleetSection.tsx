@@ -16,6 +16,7 @@ import WaterDropIcon from "@mui/icons-material/WaterDrop";
 import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
 import CollectionsIcon from "@mui/icons-material/Collections";
 import type { SvgIconComponent } from "@mui/icons-material";
+import { imageAlt } from "../../imageAlt";
 import { palette } from "../../theme";
 import { imageSources, imageUrl } from "../../utils/images";
 
@@ -207,7 +208,7 @@ export default function FleetSection() {
                                     {...imageSources(v.image)}
                                     sizes="(min-width: 900px) 50vw, 100vw"
                                     loading="lazy"
-                                    alt={v.name}
+                                    alt={imageAlt[v.image] ?? v.name}
                                     sx={{
                                         width: "100%",
                                         height: "auto",

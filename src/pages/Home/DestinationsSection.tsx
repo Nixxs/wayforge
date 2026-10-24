@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import GalleryModal, { type GalleryItem } from "../../components/GalleryModal";
+import { imageAlt } from "../../imageAlt";
 import { palette } from "../../theme";
 import { imageSources, imageUrl } from "../../utils/images";
 
@@ -116,7 +117,7 @@ export default function DestinationsSection() {
                                 {...imageSources(d.image)}
                                 sizes="(min-width: 900px) 25vw, 50vw"
                                 loading="lazy"
-                                alt={d.label}
+                                alt={imageAlt[d.image] ?? d.label}
                                 sx={{
                                     position: "absolute",
                                     inset: 0,
