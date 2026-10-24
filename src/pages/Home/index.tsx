@@ -5,8 +5,12 @@ import FleetSection from "./FleetSection";
 import DestinationsSection from "./DestinationsSection";
 import FaqSection from "./FaqSection";
 import Footer from "./Footer";
+import { homeMeta } from "../../pageMeta";
+import { usePageMeta } from "../../utils/usePageMeta";
 
 export default function Home() {
+    usePageMeta(homeMeta);
+
     return (
         <>
             <Hero />

@@ -1,10 +1,14 @@
+/* eslint-disable react-refresh/only-export-components -- build-time entry, never hot-reloaded */
 import { StrictMode } from 'react'
 import { renderToString } from 'react-dom/server'
 import { createStaticHandler, createStaticRouter, StaticRouterProvider } from 'react-router'
 import AppProviders from './AppProviders'
 import { routes } from './routes'
 
-// Build-time only: renders a route to HTML for scripts/prerender.mjs.
+export { prerenderPages, SITE_URL } from './pageMeta'
+
+// Build-time only: renders a route to HTML for scripts/prerender.mjs, which also takes the
+// list of pages (with their <head> values) from prerenderPages.
 // Emotion inlines its <style> tags into the output; on load the client cache moves them into <head>.
 export async function render(url: string) {
   const { query, dataRoutes } = createStaticHandler(routes)

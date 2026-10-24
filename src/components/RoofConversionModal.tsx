@@ -7,6 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckIcon from "@mui/icons-material/Check";
+import { vehicles } from "../data/vehicles";
 import { palette } from "../theme";
 
 interface Props {
@@ -14,25 +15,9 @@ interface Props {
     onClose: () => void;
 }
 
-const headspacePoints = [
-    "Full standing height inside the troopy while roof is raised",
-    "Integrated queen-size bed platform rises with the roof",
-    "Bed lowers back down to convert the interior into a living area",
-    "Structural aluminium extrusion frame — built for off-road vibration",
-    "Insulated double-skin roof panel for temperature management",
-    "Raises and lowers from inside — fully weather protected throughout",
-    "Fitted to Nolan",
-];
-
-const alucabPoints = [
-    "Alu-Cab Hercules — South Africa's most refined roof conversion",
-    "Aircraft-grade aluminium construction, corrosion resistant",
-    "Full-height interior living space when the roof is raised",
-    "Integrated sleeping platform rises with the roof lid",
-    "Folds flat in minutes, sealed against dust and water when closed",
-    "Integrated self-supporting gas strut system",
-    "Fitted to Reynolds",
-];
+const [reynolds, nolan] = vehicles;
+const headspacePoints = [...nolan.roof.points, `Fitted to ${nolan.name}`];
+const alucabPoints = [...reynolds.roof.points, `Fitted to ${reynolds.name}`];
 
 const troopyImages = [
     {
@@ -188,7 +173,7 @@ export default function RoofConversionModal({ open, onClose }: Props) {
                                     mb: 0.75,
                                 }}
                             >
-                                Nolan · 78 Series Troop Carrier
+                                Nolan · 78 Series Troopcarrier
                             </Typography>
                             <Typography
                                 sx={{
@@ -253,7 +238,7 @@ export default function RoofConversionModal({ open, onClose }: Props) {
                                     mb: 0.75,
                                 }}
                             >
-                                Reynolds · 79 Series Wagon
+                                Reynolds · 78 Series Troopcarrier
                             </Typography>
                             <Typography
                                 sx={{
