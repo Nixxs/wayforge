@@ -1,8 +1,18 @@
 # Wayforge crawler policy
-# AI training crawlers (e.g. GPTBot, ClaudeBot, CCBot) are currently blocked at the
-# Cloudflare edge, not here. Revisit in Phase 4 and mirror the decision below.
+# Search engines and AI search/assistant tools may crawl everything so they can find,
+# cite and link to us. AI model-training crawlers are blocked. The training block is also
+# enforced at the Cloudflare edge (AI Crawl Control); keep the two lists in sync.
 
 User-agent: *
 Allow: /
+
+# AI model-training crawlers
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: CCBot
+User-agent: Amazonbot
+User-agent: Bytespider
+User-agent: meta-externalagent
+Disallow: /
 
 Sitemap: https://wayforge.com.au/sitemap.xml
