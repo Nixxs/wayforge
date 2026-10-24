@@ -1,23 +1,23 @@
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { CssBaseline, ThemeProvider, createTheme } from '@mui/material'
+import { createRoot, hydrateRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
+import AppProviders from './AppProviders.tsx'
 
-const theme = createTheme({
-  typography: {
-    fontFamily: '"Aileron", sans-serif',
-    fontWeightRegular: 400,
-    fontWeightMedium: 600,
-    fontWeightBold: 700,
-  },
-})
+const container = document.getElementById('root')!
 
-createRoot(document.getElementById('root')!).render(
+const app = (
   <StrictMode>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
+    <AppProviders>
       <App />
-    </ThemeProvider>
-  </StrictMode>,
+    </AppProviders>
+  </StrictMode>
 )
+
+// index.html holds the prerendered homepage. The host serves that same file for every path,
+// so only hydrate on "/"; anywhere else (e.g. the 404 page) render fresh over it.
+if (window.location.pathname === '/' && container.hasChildNodes()) {
+  hydrateRoot(container, app)
+} else {
+  createRoot(container).render(app)
+}
