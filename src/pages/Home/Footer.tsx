@@ -9,7 +9,8 @@ import EmailIcon from "@mui/icons-material/Email";
 import { palette } from "../../theme";
 import TermsModal from "../../components/TermsModal";
 import RoofConversionModal from "../../components/RoofConversionModal";
-import VehicleSpecsModal from "../../components/VehicleSpecsModal";
+import { Link as RouterLink, useLocation } from "react-router";
+import { vehicles, vehiclePath } from "../../data/vehicles";
 import { scrollToId } from "../../utils/scroll";
 
 const footerLinkSx = {
@@ -33,13 +34,12 @@ const footerButtonSx = {
 export default function Footer() {
     const [termsOpen, setTermsOpen] = useState(false);
     const [roofOpen, setRoofOpen] = useState(false);
-    const [specsOpen, setSpecsOpen] = useState(false);
+    const { pathname } = useLocation();
 
     return (
         <Box id="contact" component="footer" sx={{ backgroundColor: palette.navy }}>
             <TermsModal open={termsOpen} onClose={() => setTermsOpen(false)} />
             <RoofConversionModal open={roofOpen} onClose={() => setRoofOpen(false)} />
-            <VehicleSpecsModal open={specsOpen} onClose={() => setSpecsOpen(false)} />
             <Container maxWidth="xl">
                 <Box sx={{ py: { xs: 6, md: 8 } }}>
                     <Grid container spacing={{ xs: 5, md: 4 }}>
@@ -78,30 +78,27 @@ export default function Footer() {
                             </Typography>
                             <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
                                 <Typography
-                                    component="a"
-                                    href="#fleet"
+                                    component={RouterLink}
+                                    to="/#fleet"
                                     onClick={(e) => {
-                                        e.preventDefault();
-                                        scrollToId("fleet");
+                                        // Already on the homepage: scroll instead of navigating
+                                        if (pathname === "/") {
+                                            e.preventDefault();
+                                            scrollToId("fleet");
+                                        }
                                     }}
                                     sx={footerLinkSx}
                                 >
                                     Vehicle Fleet
                                 </Typography>
-                                {([
-                                    { label: "Troopy Roof Conversion", action: () => setRoofOpen(true) },
-                                    { label: "Vehicle Specs", action: () => setSpecsOpen(true) },
-                                ] as const).map(({ label, action }) => (
-                                    <Typography
-                                        key={label}
-                                        component="button"
-                                        type="button"
-                                        onClick={action}
-                                        sx={footerButtonSx}
-                                    >
-                                        {label}
+                                {vehicles.map((v) => (
+                                    <Typography key={v.slug} component={RouterLink} to={vehiclePath(v)} sx={footerLinkSx}>
+                                        {v.shortName}
                                     </Typography>
                                 ))}
+                                <Typography component="button" type="button" onClick={() => setRoofOpen(true)} sx={footerButtonSx}>
+                                    Troopy Roof Conversion
+                                </Typography>
                             </Box>
                         </Grid>
 

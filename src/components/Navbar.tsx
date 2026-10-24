@@ -153,7 +153,9 @@ export default function Navbar() {
                         {navLinks.map((link) => {
                             const isActive = location.pathname === "/" && link.scrollId
                                 ? activeSection === link.scrollId
-                                : Boolean(link.href && location.pathname === link.href);
+                                : link.scrollId === "fleet"
+                                    ? location.pathname.startsWith("/vehicles/")
+                                    : Boolean(link.href && location.pathname === link.href);
                             const linkSx = {
                                 color: isActive ? "white" : "rgba(255,255,255,0.75)",
                                 textDecoration: "none",

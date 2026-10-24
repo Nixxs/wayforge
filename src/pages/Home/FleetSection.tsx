@@ -7,62 +7,16 @@ import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import GalleryModal, { type GalleryItem } from "../../components/GalleryModal";
 import RoofConversionModal from "../../components/RoofConversionModal";
-import VehicleSpecsModal from "../../components/VehicleSpecsModal";
-import BoltIcon from "@mui/icons-material/Bolt";
-import KitchenIcon from "@mui/icons-material/Kitchen";
-import PeopleIcon from "@mui/icons-material/People";
-import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
-import WaterDropIcon from "@mui/icons-material/WaterDrop";
-import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
 import CollectionsIcon from "@mui/icons-material/Collections";
-import type { SvgIconComponent } from "@mui/icons-material";
+import { Link as RouterLink } from "react-router";
+import { vehicles, vehiclePath } from "../../data/vehicles";
 import { imageAlt } from "../../imageAlt";
 import { palette } from "../../theme";
 import { imageSources, imageUrl } from "../../utils/images";
 
-const vehicles = [
-    {
-        name: "Reynolds (Family Cruiser)",
-        badge: "MANUAL",
-        subtitle: "Ideal for small families",
-        image: "reynolds-1",
-        gallery: ["reynolds-1", "reynolds-2", "reynolds-3", "reynolds-4", "reynolds-5", "reynolds-6", "reynolds-7", "reynolds-8", "reynolds-9", "reynolds-10", "reynolds-11", "reynolds-12", "reynolds-13", "reynolds-14", "reynolds-15"],
-        description:
-            "A 2017 VDJ78 Troopy built for off-grid family travel. Roof conversion above, premium fitout below - fully self-contained with power, water, and kitchen. Just drive and stay.",
-        features: [
-            { Icon: PeopleIcon, label: "Sleeps 2 Adults + 1 Child" },
-            { Icon: KitchenIcon, label: "Pull-out Kitchen + Cookware" },
-            { Icon: BoltIcon, label: "200Ah Battery" },
-            { Icon: WaterDropIcon, label: "55L Water Tank" },
-            { Icon: WorkspacePremiumIcon, label: "Premium Interior Fitout" },
-            { Icon: LocalGasStationIcon, label: "180L Fuel Capacity" },
-        ],
-        bookingUrl: "https://www.camplify.com.au/rv/151421",
-    },
-    {
-        name: "Nolan (Adventure Rig)",
-        badge: "MANUAL",
-        subtitle: "Ultimate 2-person touring",
-        image: "nolan-hero",
-        gallery: ["nolan-hero", "nolan-2", "nolan-3", "nolan-4", "nolan-5", "nolan-6", "nolan-7", "nolan-8", "nolan-9", "nolan-10", "nolan-11", "nolan-12", "nolan-13", "nolan-14", "nolan-15", "nolan-16", "nolan-17", "nolan-18"],
-        description:
-            "A 2014 VDJ78 Troopy built for two people to travel further and stay longer. Roof conversion above, premium fitout below — with more space, storage, and extended range.",
-        features: [
-            { Icon: PeopleIcon, label: "Sleeps 2 (Full-Length Bed)" },
-            { Icon: KitchenIcon, label: "Pull-out Kitchen + Cookware" },
-            { Icon: LocalGasStationIcon, label: "180L Fuel Capacity" },
-            { Icon: BoltIcon, label: "200Ah Battery" },
-            { Icon: WaterDropIcon, label: "90L Water Tank" },
-            { Icon: WorkspacePremiumIcon, label: "Premium Fitout + Storage" },
-        ],
-        bookingUrl: "https://www.camplify.com.au/rv/156164",
-    },
-] as const;
-
 export default function FleetSection() {
     const [activeGallery, setActiveGallery] = useState<GalleryItem | null>(null);
     const [roofOpen, setRoofOpen] = useState(false);
-    const [specsOpen, setSpecsOpen] = useState(false);
 
     return (
         <Box
@@ -76,7 +30,6 @@ export default function FleetSection() {
             }}
         >
             <RoofConversionModal open={roofOpen} onClose={() => setRoofOpen(false)} />
-            <VehicleSpecsModal open={specsOpen} onClose={() => setSpecsOpen(false)} />
             <Container maxWidth="xl">
                 {/* Section header */}
                 <Box
@@ -167,7 +120,7 @@ export default function FleetSection() {
                 >
                     {vehicles.map((v) => (
                         <Box
-                            key={v.name}
+                            key={v.slug}
                             sx={{
                                 backgroundColor: "#fff",
                                 borderRadius: 1,
@@ -187,8 +140,8 @@ export default function FleetSection() {
                             <Box
                                 component="button"
                                 type="button"
-                                aria-label={`View ${v.name} gallery, ${v.gallery.length} photos`}
-                                onClick={() => setActiveGallery({ label: v.name, subtitle: v.subtitle, gallery: v.gallery })}
+                                aria-label={`View ${v.name} (${v.nickname}) gallery, ${v.gallery.length} photos`}
+                                onClick={() => setActiveGallery({ label: `${v.name} (${v.nickname})`, subtitle: v.subtitle, gallery: v.gallery })}
                                 sx={{
                                     position: "relative",
                                     display: "block",
@@ -208,7 +161,7 @@ export default function FleetSection() {
                                     {...imageSources(v.image)}
                                     sizes="(min-width: 900px) 50vw, 100vw"
                                     loading="lazy"
-                                    alt={imageAlt[v.image] ?? v.name}
+                                    alt={imageAlt[v.image] ?? v.headline}
                                     sx={{
                                         width: "100%",
                                         height: "auto",
@@ -278,7 +231,7 @@ export default function FleetSection() {
                                             fontSize: { xs: "1.2rem", md: "1.4rem" },
                                         }}
                                     >
-                                        {v.name}
+                                        {v.name} ({v.nickname})
                                     </Typography>
                                     <Chip
                                         label={v.badge}
@@ -320,16 +273,11 @@ export default function FleetSection() {
                                     {v.description}
                                 </Typography>
                                 <Typography
-                                    component="button"
-                                    type="button"
-                                    onClick={() => setSpecsOpen(true)}
+                                    component={RouterLink}
+                                    to={vehiclePath(v)}
                                     sx={{
                                         alignSelf: "flex-start",
-                                        p: 0,
-                                        border: 0,
-                                        background: "none",
-                                        textAlign: "left",
-                                        cursor: "pointer",
+                                        textDecoration: "none",
                                         color: palette.navy,
                                         fontSize: "0.78rem",
                                         fontWeight: 700,
@@ -338,7 +286,7 @@ export default function FleetSection() {
                                         "&:hover": { opacity: 0.7 },
                                     }}
                                 >
-                                    View Full Specifications
+                                    View Full Specifications &amp; Photos →
                                 </Typography>
 
                                 <Divider sx={{ my: 0.5, borderColor: "rgba(0,0,0,0.07)" }} />
@@ -351,7 +299,7 @@ export default function FleetSection() {
                                         gap: 1.5,
                                     }}
                                 >
-                                    {v.features.map((f: { Icon: SvgIconComponent; label: string }) => (
+                                    {v.features.map((f) => (
                                         <Box
                                             key={f.label}
                                             sx={{ display: "flex", alignItems: "center", gap: 1 }}

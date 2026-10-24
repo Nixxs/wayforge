@@ -14,6 +14,7 @@ export interface GalleryItem {
     label: string;
     subtitle?: string;
     gallery: readonly ImageName[];
+    startIndex?: number;
 }
 
 interface GalleryModalProps {
@@ -53,7 +54,15 @@ function preload(name: ImageName) {
 }
 
 export default function GalleryModal({ item, onClose }: GalleryModalProps) {
-    const [slideIndex, setSlideIndex] = useState(0);
+    const [slideIndex, setSlideIndex] = useState(item?.startIndex ?? 0);
+    const [shownItem, setShownItem] = useState(item);
+
+    // Start each newly opened gallery at its requested photo (adjusting state during render,
+    // as React recommends for resetting state when a prop changes)
+    if (item !== shownItem) {
+        setShownItem(item);
+        setSlideIndex(item?.startIndex ?? 0);
+    }
     const count = item?.gallery.length ?? 0;
 
     // Warm the neighbouring slides so prev/next don't wait on a fresh download
@@ -62,10 +71,6 @@ export default function GalleryModal({ item, onClose }: GalleryModalProps) {
         preload(item.gallery[(slideIndex + 1) % count]);
         preload(item.gallery[(slideIndex - 1 + count) % count]);
     }, [item, slideIndex, count]);
-
-    function handleOpen() {
-        setSlideIndex(0);
-    }
 
     function prev() {
         if (!item) return;
@@ -85,7 +90,7 @@ export default function GalleryModal({ item, onClose }: GalleryModalProps) {
     const slide = item ? imageSources(item.gallery[slideIndex]) : null;
 
     return (
-        <Modal open={!!item} onClose={onClose} onTransitionEnter={handleOpen} aria-labelledby="gallery-title">
+        <Modal open={!!item} onClose={onClose} aria-labelledby="gallery-title">
             <Box
                 sx={{
                     position: "fixed",

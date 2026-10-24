@@ -1,12 +1,12 @@
 import type { ImageName } from "./utils/images";
 
 // Describe what each photo shows. Lead with the terms people search for (LandCruiser, Troopy,
-// Troop Carrier, Alu-Cab, Headspace Campers, Odyssey Custom Fitouts) rather than the vehicle
+// Troopcarrier, Alu-Cab, Headspace Campers, Odyssey Custom Fitouts) rather than the vehicle
 // names, vary the wording, and keep each under ~125 characters.
 export const imageAlt: Partial<Record<ImageName, string>> = {
     // Reynolds — 2017 VDJ78, Alu-Cab roof conversion
     "reynolds-1": "Toyota LandCruiser Troopy with Alu-Cab roof conversion raised, parked on red dirt below gorge cliffs at sunset",
-    "reynolds-2": "Fold-down side table and lift-up side hatch storage on a LandCruiser Troop Carrier, under the awning",
+    "reynolds-2": "Fold-down side table and lift-up side hatch storage on a LandCruiser Troopcarrier, under the awning",
     "reynolds-3": "Cab of a VDJ78 LandCruiser Troopcarrier: right-hand-drive dashboard and manual gearstick",
     "reynolds-4": "Rear doors open on an Odyssey Custom Fitouts interior with cabinets, bench seat and door storage bags",
     "reynolds-5": "Looking down from the raised Alu-Cab roof into the Troopy: bench seat, cabinetry and timber-look floor",
@@ -15,7 +15,7 @@ export const imageAlt: Partial<Record<ImageName, string>> = {
     "reynolds-8": "Pull-out rear kitchen in a LandCruiser Troopy with two-burner stove and slide-out bench",
     "reynolds-9": "Kitchen storage drawer with washing-up tub, detergent and tea towels",
     "reynolds-10": "Utensil drawer with tongs, spatulas, scissors and peeler in the Odyssey Custom Fitouts kitchen",
-    "reynolds-11": "Camp cooking pots on the pull-out kitchen of a Troop Carrier camper",
+    "reynolds-11": "Camp cooking pots on the pull-out kitchen of a Troopcarrier camper",
     "reynolds-12": "Kitchen drawer with chef's knives on a chopping board, washing-up tub and tea towels",
     "reynolds-13": "Crockery drawer holding plates, bowls and mugs in a padded liner",
     "reynolds-14": "LandCruiser Troopcarrier with Alu-Cab pop-top raised on red outback dirt at dusk",
@@ -40,7 +40,7 @@ export const imageAlt: Partial<Record<ImageName, string>> = {
     "nolan-15": "12-volt oven built into the Odyssey Custom Fitouts cabinetry beside the cab",
     "nolan-16": "Spares and consumables bags with engine oil, coolant, oil filter and toilet paper",
     "nolan-17": "Troopcarrier External utility panel with Anderson power plug, air fitting and water connections",
-    "nolan-18": "Side hatch storage on a Troop Carrier holding a hose, extension lead and toiletries",
+    "nolan-18": "Side hatch storage on a Troopcarrier holding a hose, extension lead and toiletries",
     "nolan-19": "Side profile of a LandCruiser Troopy with Headspace roof raised among coastal sand dunes at sunset",
 
     // Comparison section

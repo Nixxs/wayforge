@@ -14,9 +14,12 @@ const app = (
   </StrictMode>
 )
 
-// index.html holds the prerendered homepage. The host serves that same file for every path,
-// so only hydrate on "/"; anywhere else (e.g. the 404 page) render fresh over it.
-if (window.location.pathname === '/' && container.hasChildNodes()) {
+// Each prerendered page records its path in data-prerendered. The host falls back to the
+// homepage HTML for unknown paths (e.g. the 404 page), so only hydrate when the path matches;
+// otherwise render fresh over it.
+const pathname = window.location.pathname.endsWith('/') ? window.location.pathname : `${window.location.pathname}/`
+
+if (container.dataset.prerendered === pathname) {
   hydrateRoot(container, app)
 } else {
   createRoot(container).render(app)
